@@ -230,6 +230,12 @@ if not st.session_state.get("authenticated", False):
                     tr("Email is required")
                 )
 
+            elif not email_signup.lower().endswith("@groupe-ethica.com"):
+
+                st.error(
+                    "Only @groupe-ethica.com email addresses are allowed."
+                )
+
             elif password_signup != confirm_password:
 
                 st.error(

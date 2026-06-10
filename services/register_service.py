@@ -15,6 +15,13 @@ def register_user(
 
     try:
 
+        # Only Ethica emails allowed
+        if not email.lower().endswith("@groupe-ethica.com"):
+            return (
+                False,
+                "Only @groupe-ethica.com email addresses are allowed"
+            )
+
         existing = (
             db.query(User)
             .filter(User.email == email)
