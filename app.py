@@ -323,6 +323,7 @@ else:
                 )
 
         page_selected = st.radio(
+            tr(" "),
             menu_labels,
             index=default_index
         )
