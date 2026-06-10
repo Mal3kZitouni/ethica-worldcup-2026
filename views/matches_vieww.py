@@ -222,7 +222,7 @@ def render_match(match, user_id):
             match.match_date.strftime(
                 "%Y-%m-%d %H:%M"
             )
-            + " ET"
+            + " GMT"
         )
 
     except Exception:
