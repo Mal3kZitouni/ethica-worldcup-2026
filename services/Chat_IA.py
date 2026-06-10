@@ -84,7 +84,7 @@ def render_chat_panel():
     st.markdown("""
         <div class="chat-header">
             <div class="floating-bot">🤖</div>
-            <div class="chat-title">Ethica AI</div>
+            <div class="chat-title">P&A AI</div>
             <div style="color: #666; font-size: 0.9rem;">Assistant Tactique en direct</div>
         </div>
     """, unsafe_allow_html=True)
@@ -92,7 +92,7 @@ def render_chat_panel():
     # 3. INITIALISATION DE LA MÉMOIRE
     if "messages" not in st.session_state:
         st.session_state.messages = [
-            {"role": "assistant", "content": "Bonjour ! Prêt à grimper dans le classement Ethica ? Posez-moi vos questions. ⚽"}
+            {"role": "assistant", "content": "Bonjour ! Prêt à grimper dans le classement P&A ? Posez-moi vos questions. ⚽"}
         ]
 
     # 4. ZONE DE DISCUSSION

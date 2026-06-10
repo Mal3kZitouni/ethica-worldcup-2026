@@ -265,6 +265,18 @@ class WinnerPrediction(Base):
         nullable=False
     )
 
+    bonus_points = Column(
+        Integer,
+        nullable=False,
+        default=0
+    )
+
+    bonus_awarded = Column(
+        Boolean,
+        nullable=False,
+        default=False
+    )
+
     created_at = Column(
         DateTime(timezone=True),
         server_default=func.now()
