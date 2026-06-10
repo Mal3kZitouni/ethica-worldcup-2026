@@ -83,7 +83,7 @@ def show():
         st.markdown(
             f"""
             <div style="
-                background:linear-gradient(135deg,#49264F,#49264F);
+                background:linear-gradient(135deg,#49264F,#00003d);
                 padding:30px;
                 border-radius:20px;
                 color:white;

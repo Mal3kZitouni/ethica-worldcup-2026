@@ -116,23 +116,6 @@ def show():
             unsafe_allow_html=True
         )
 
-        # ==================================================
-        # PROFILE INFO
-        # ==================================================
-        col1, col2 = st.columns(2)
-
-        with col1:
-            st.info(
-                f"🌍 {tr('Country')}: "
-                f"{user_country if user_country else tr('Not specified')}"
-            )
-
-        with col2:
-            st.info(
-                f"👥 {tr('Team')}: "
-                f"{user_team if user_team else 'P&A'}"
-            )
-
         # =================================================
         # ==================================================
         # USER RANKING
