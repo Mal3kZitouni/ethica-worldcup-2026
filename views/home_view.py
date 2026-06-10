@@ -159,7 +159,7 @@ def show():
 
                 with mc2:
                     st.write(
-                        f"📅 {match.match_date.strftime('%Y-%m-%d %H:%M')} ET"
+                        f"📅 {match.match_date.strftime('%Y-%m-%d %H:%M')} GMT"
                     )
                     st.caption(
                         f"🏟 {stadium} - {city}"
