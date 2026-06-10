@@ -153,7 +153,7 @@ def show():
 
             with st.container(border=True):
 
-                mc1, mc2 = st.columns([3, 1])
+                mc1, mc2 = st.columns([3, 2])
 
                 with mc1:
                     st.markdown(f"### {match.home_team} vs {match.away_team}")

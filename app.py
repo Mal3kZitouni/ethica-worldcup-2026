@@ -90,16 +90,14 @@ div[role="radiogroup"]{
 with st.sidebar:
 
     st.markdown(f"##### 🌐 {tr('Application Language')}")
-    left, center, right = st.columns([1, 2, 1])
 
-    with center:
-        selected_lang = st.radio(
+    selected_lang = st.radio(
         "",
         ["🇫🇷 Français", "🇬🇧 English"],
-    horizontal=True,
-    label_visibility="collapsed",
-    index=0 if st.session_state.lang == "fr" else 1,
-    key="language_selector"
+        horizontal=True,
+        label_visibility="collapsed",
+        index=0 if st.session_state.lang == "fr" else 1,
+        key="language_selector"
     )
 
     new_lang = (
