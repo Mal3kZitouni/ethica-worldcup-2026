@@ -84,7 +84,7 @@ def render_chat_panel():
     st.markdown("""
         <div class="chat-header">
             <div class="floating-bot">🤖</div>
-            <div class="chat-title">P&A AI</div>
+            <div class="chat-title">Performance & Analytics AI</div>
             <div style="color: #666; font-size: 0.9rem;">Assistant Tactique en direct</div>
         </div>
     """, unsafe_allow_html=True)
