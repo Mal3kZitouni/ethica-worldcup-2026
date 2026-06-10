@@ -1,7 +1,6 @@
 import streamlit as st
 
 from services.match_service import load_matches
-from services.prediction_service import get_user_predictions
 from services.ranking_service import get_ranking
 from services.Chat_IA import render_chat_panel
 from services.translations import tr
@@ -37,7 +36,7 @@ def show():
         st.markdown(
             f"""
             <div style="
-                background: linear-gradient(90deg,#00003d,#252566);
+                background: linear-gradient(90deg,#00003d,#49264F);
                 padding:25px;
                 border-radius:20px;
                 margin-bottom:20px;
@@ -106,7 +105,7 @@ def show():
             f"""
             <div class="reward-card">
                 <div class="reward-title">⚽ {tr('Tournament Winner Prediction')}</div>
-                <div class="reward-line">⚽ {tr('Group Stage')}: <b>15 {tr('points')}</b></div>
+                <div class="reward-line">🏆 {tr('Group Stage')}: <b>15 {tr('points')}</b></div>
                 <div class="reward-line">🏆 {tr('Round of 32')}: <b>12 {tr('points')}</b></div>
                 <div class="reward-line">🏆 {tr('Round of 16')}: <b>10 {tr('points')}</b></div>
                 <div class="reward-line">🏆 {tr('Quarter Finals')}: <b>7 {tr('points')}</b></div>
@@ -134,31 +133,7 @@ def show():
                 f"{user_team if user_team else 'P&A'}"
             )
 
-        # ==================================================
-        # USER STATS
-        # ==================================================
-        predictions = get_user_predictions(user_id)
-
-        total_predictions = len(predictions)
-        total_points = sum(p.points_earned for p in predictions)
-        correct_results = sum(
-            1 for p in predictions if p.is_correct_result
-        )
-        exact_scores = sum(
-            1 for p in predictions if p.is_exact_score
-        )
-
-        st.subheader(f"📊 {tr('My Statistics')}")
-
-        c1, c2, c3, c4 = st.columns(4)
-
-        c1.metric(tr("Predictions"), total_predictions)
-        c2.metric(tr("Points"), total_points)
-        c3.metric(tr("Correct Results"), correct_results)
-        c4.metric(tr("Exact Scores"), exact_scores)
-
-        st.markdown("---")
-
+        # =================================================
         # ==================================================
         # USER RANKING
         # ==================================================

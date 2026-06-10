@@ -13,7 +13,7 @@ from services.winner_prediction_service import (
 from services.translations import tr
 from utils.qualified_teams import QUALIFIED_TEAMS
 
-
+user_id = st.session_state.get("user_id")
 # ----------------------
 # MATCH STARTED ?
 # ----------------------
@@ -83,7 +83,7 @@ def show():
         st.markdown(
             f"""
             <div style="
-                background:linear-gradient(135deg,#8D40DA,#B06CF7);
+                background:linear-gradient(135deg,#49264F,#49264F);
                 padding:30px;
                 border-radius:20px;
                 color:white;
@@ -92,7 +92,7 @@ def show():
                 box-shadow:0 10px 30px rgba(141,64,218,0.25);
             ">
                 <h2>🏆 {tr('Your Champion')}</h2>
-                <h1 style="margin-top:10px;">
+                <h1 style="margin-top:8px;">
                     {existing_winner_prediction.predicted_winner}
                 </h1>
                 <p>
@@ -129,35 +129,6 @@ def show():
             unsafe_allow_html=True
         )
 
-        c1, c2 = st.columns(2)
-
-        with c1:
-            st.metric(
-                tr("Prediction Phase"),
-                tr(active_stage)
-            )
-
-        with c2:
-            st.metric(
-                tr("Bonus Points"),
-                current_bonus
-            )
-
-        with st.expander(
-            f"🎯 {tr('Bonus Points Breakdown')}"
-        ):
-
-            st.markdown(f"""
-            | {tr('Stage')} | {tr('Points')} |
-            |---------|---------|
-            | {tr('Group Stage')} | 15 |
-            | {tr('Round of 32')} | 12 |
-            | {tr('Round of 16')} | 10 |
-            | {tr('Quarter Finals')} | 7 |
-            | {tr('Semi Finals')} | 5 |
-            | {tr('Final')} | 3 |
-            """)
-
         st.markdown(
             f"### 🌎 {tr('Select Your Champion')}"
         )
@@ -192,6 +163,52 @@ def show():
 
             st.rerun()
 
+
+    st.markdown("---")
+
+    predictions = get_user_predictions(user_id)
+
+    total_predictions = len(predictions)
+    total_points = sum(
+        p.points_earned or 0
+        for p in predictions
+    )
+
+    correct_results = sum(
+        1
+        for p in predictions
+        if p.is_correct_result
+    )
+
+    exact_scores = sum(
+        1
+        for p in predictions
+        if p.is_exact_score
+    )
+
+    st.subheader(f"📊 {tr('My Statistics')}")
+
+    c1, c2, c3, c4 = st.columns(4)
+
+    c1.metric(
+        tr("Predictions"),
+        total_predictions
+    )
+
+    c2.metric(
+        tr("Points"),
+        total_points
+    )
+
+    c3.metric(
+        tr("Correct Results"),
+        correct_results
+    )
+
+    c4.metric(
+        tr("Exact Scores"),
+        exact_scores
+    )
 
     st.markdown("---")
 
@@ -316,26 +333,31 @@ def show():
                 f"{match.away_team}"
             ):
 
+                st.markdown(
+                    f"### ⚽ {match.home_team} vs {match.away_team}"
+                )
+
                 col1, col2 = st.columns(2)
 
                 new_home = col1.number_input(
-                    tr("Home Score"),
+                    f"{match.home_team} {tr('Score')}",
                     min_value=0,
                     max_value=20,
-                    value=int(
-                        pred.predicted_home_score
-                    ),
+                    value=int(pred.predicted_home_score),
                     key=f"edit_home_{match.id}"
                 )
 
                 new_away = col2.number_input(
-                    tr("Away Score"),
+                    f"{match.away_team} {tr('Score')}",
                     min_value=0,
                     max_value=20,
-                    value=int(
-                        pred.predicted_away_score
-                    ),
+                    value=int(pred.predicted_away_score),
                     key=f"edit_away_{match.id}"
+                )
+
+                st.info(
+                    f"{match.home_team} {new_home} - "
+                    f"{new_away} {match.away_team}"
                 )
 
                 if st.button(
@@ -351,9 +373,7 @@ def show():
                     )
 
                     st.success(
-                        tr(
-                            "Prediction updated successfully!"
-                        )
+                        tr("Prediction updated successfully!")
                     )
 
                     st.rerun()
