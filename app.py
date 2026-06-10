@@ -90,14 +90,16 @@ div[role="radiogroup"]{
 with st.sidebar:
 
     st.markdown(f"##### 🌐 {tr('Application Language')}")
+    left, center, right = st.columns([1, 3, 1])
 
-    selected_lang = st.radio(
+    with center:
+        selected_lang = st.radio(
         "",
         ["🇫🇷 Français", "🇬🇧 English"],
-        horizontal=True,
-        label_visibility="collapsed",
-        index=0 if st.session_state.lang == "fr" else 1,
-        key="language_selector"
+    horizontal=True,
+    label_visibility="collapsed",
+    index=0 if st.session_state.lang == "fr" else 1,
+    key="language_selector"
     )
 
     new_lang = (
@@ -271,7 +273,7 @@ else:
         with center:
             st.image(
                 "assets/panda.png",
-                width=200
+                width=230
             )
 
         st.markdown("---")
