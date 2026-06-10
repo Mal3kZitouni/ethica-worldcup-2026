@@ -14,14 +14,8 @@ def show():
     user_country = st.session_state.get("country", "")
     user_team = st.session_state.get("team", "P&A")
 
-    # ==================================================
-    # LAYOUT
-    # ==================================================
     col_main, col_chat = st.columns([6.5, 3.5], gap="large")
 
-    # ==================================================
-    # MAIN CONTENT
-    # ==================================================
     with col_main:
 
         # ==================================================
@@ -43,6 +37,38 @@ def show():
                 {tr("Compete with colleagues")} •
                 {tr("Climb the rankings")}
             </p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+        # ==================================================
+        # 🟣 POINTS REWARDS SECTION (NEW)
+        # ==================================================
+        st.markdown(
+            f"""
+            <div style="
+                background: #F7F3FF;
+                border: 1px solid #E6D8FA;
+                padding: 18px;
+                border-radius: 16px;
+                margin-bottom: 20px;
+            ">
+                <h3 style="color:#8D40DA;">🏆 {tr('Points Rewards System')}</h3>
+
+                <p>⚽ <b>Exact Score:</b> 5 points</p>
+                <p>🎯 <b>Correct Result (winner/draw):</b> 3 points</p>
+                <p>📊 <b>Wrong prediction:</b> 1 point</p>
+
+                <hr style="margin:10px 0;">
+
+                <p>🏆 <b>Champion Bonus:</b></p>
+                <p>• Group Stage: 15 pts</p>
+                <p>• Round of 32: 12 pts</p>
+                <p>• Round of 16: 10 pts</p>
+                <p>• Quarter Finals: 7 pts</p>
+                <p>• Semi Finals: 5 pts</p>
+                <p>• Final: 3 pts</p>
             </div>
             """,
             unsafe_allow_html=True
@@ -83,25 +109,10 @@ def show():
 
         c1, c2, c3, c4 = st.columns(4)
 
-        c1.metric(
-            tr("Predictions"),
-            total_predictions
-        )
-
-        c2.metric(
-            tr("Points"),
-            total_points
-        )
-
-        c3.metric(
-            tr("Correct Results"),
-            correct_results
-        )
-
-        c4.metric(
-            tr("Exact Scores"),
-            exact_scores
-        )
+        c1.metric(tr("Predictions"), total_predictions)
+        c2.metric(tr("Points"), total_points)
+        c3.metric(tr("Correct Results"), correct_results)
+        c4.metric(tr("Exact Scores"), exact_scores)
 
         st.markdown("---")
 
@@ -117,9 +128,7 @@ def show():
                 break
 
         if user_rank:
-            st.success(
-                f"🏅 {tr('Your Current Ranking')}: #{user_rank}"
-            )
+            st.success(f"🏅 {tr('Your Current Ranking')}: #{user_rank}")
 
         st.markdown("---")
 
@@ -129,19 +138,13 @@ def show():
         st.subheader(f"⚽ {tr('Upcoming Matches')}")
 
         matches = load_matches()
-        upcoming = sorted(
-            matches,
-            key=lambda m: m.match_date
-        )
+        upcoming = sorted(matches, key=lambda m: m.match_date)
 
         shown = 0
 
         for match in upcoming:
 
-            if (
-                match.home_score is not None
-                and match.away_score is not None
-            ):
+            if match.home_score is not None and match.away_score is not None:
                 continue
 
             stadium = match.stadium or tr("TBD")
@@ -152,18 +155,14 @@ def show():
                 mc1, mc2 = st.columns([3, 1])
 
                 with mc1:
-                    st.markdown(
-                        f"### {match.home_team} vs {match.away_team}"
-                    )
+                    st.markdown(f"### {match.home_team} vs {match.away_team}")
                     st.caption(f"🏆 {match.stage}")
 
                 with mc2:
                     st.write(
                         f"📅 {match.match_date.strftime('%Y-%m-%d %H:%M')} GMT"
                     )
-                    st.caption(
-                        f"🏟 {stadium} - {city}"
-                    )
+                    st.caption(f"🏟 {stadium} - {city}")
 
             shown += 1
 
@@ -179,18 +178,10 @@ def show():
 
         for position, player in enumerate(top5, start=1):
 
-            if position == 1:
-                medal = "🥇"
-            elif position == 2:
-                medal = "🥈"
-            elif position == 3:
-                medal = "🥉"
-            else:
-                medal = f"#{position}"
+            medal = "🥇" if position == 1 else "🥈" if position == 2 else "🥉" if position == 3 else f"#{position}"
 
             st.write(
-                f"{medal} {player.name} — "
-                f"{player.points} {tr('pts')}"
+                f"{medal} {player.name} — {player.points} {tr('pts')}"
             )
 
         st.markdown("---")
@@ -199,32 +190,18 @@ def show():
         # TOURNAMENT PROGRESS
         # ==================================================
         completed = sum(
-            1
-            for m in matches
-            if (
-                m.home_score is not None
-                and m.away_score is not None
-            )
+            1 for m in matches
+            if m.home_score is not None and m.away_score is not None
         )
 
         total_matches = len(matches)
 
-        progress = (
-            completed / total_matches
-            if total_matches > 0
-            else 0
-        )
+        progress = completed / total_matches if total_matches > 0 else 0
 
-        st.subheader(
-            f"🌍 {tr('Tournament Progress')}"
-        )
-
+        st.subheader(f"🌍 {tr('Tournament Progress')}")
         st.progress(progress)
 
-        st.write(
-            f"{completed} / {total_matches} "
-            f"{tr('matches completed')}"
-        )
+        st.write(f"{completed} / {total_matches} {tr('matches completed')}")
 
     # ==================================================
     # AI CHAT PANEL
