@@ -322,17 +322,14 @@ else:
                     )
                 )
 
-        page_selected = st.radio(
-            tr(" "),
-            menu_labels,
-            index=default_index
-        )
+            page_selected = st.radio(
+                tr(" "),
+                menu_labels,
+                key="navigation_radio"
+            )
 
-        page = menu_items[
-            page_selected
-        ]
-
-        st.session_state.current_page = page
+            page = menu_items[page_selected]
+            st.session_state.current_page = page
 
         st.markdown("---")
 

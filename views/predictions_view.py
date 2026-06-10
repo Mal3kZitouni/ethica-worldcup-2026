@@ -13,7 +13,6 @@ from services.winner_prediction_service import (
 from services.translations import tr
 from utils.qualified_teams import QUALIFIED_TEAMS
 
-user_id = st.session_state.get("user_id")
 # ----------------------
 # MATCH STARTED ?
 # ----------------------
@@ -31,6 +30,8 @@ def has_started(match_date):
 # MAIN PAGE
 # ----------------------
 def show():
+    user_id = st.session_state.get("user_id")
+
 
     st.title(f"📝 {tr('My Predictions')}")
 
