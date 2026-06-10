@@ -90,7 +90,7 @@ div[role="radiogroup"]{
 with st.sidebar:
 
     st.markdown(f"##### 🌐 {tr('Application Language')}")
-    left, center, right = st.columns([1, 3, 1])
+    left, center, right = st.columns([1, 2, 1])
 
     with center:
         selected_lang = st.radio(
