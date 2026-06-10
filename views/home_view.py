@@ -37,7 +37,7 @@ def show():
         st.markdown(
             f"""
             <div style="
-                background: linear-gradient(90deg,#4d408c,#E6BEEA);
+                background: linear-gradient(90deg,#00003d,#252566);
                 padding:25px;
                 border-radius:20px;
                 margin-bottom:20px;
