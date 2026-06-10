@@ -266,10 +266,13 @@ else:
 
     with st.sidebar:
 
-        st.image(
-           "assets/panda.png",
-            width=200
-        )
+        left, center, right = st.columns([1, 3, 1])
+
+        with center:
+            st.image(
+                "assets/panda.png",
+                width=200
+            )
 
         st.markdown("---")
 
