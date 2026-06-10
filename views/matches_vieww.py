@@ -375,7 +375,7 @@ def render_match(match, user_id):
                             .ethica-warning-box {
                                 animation: warningPulse 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
                                 background: linear-gradient(135deg, #FFF5F5 0%, #FFF0F0 100%);
-                                border-left: 6px solid #8D40DA; /* Rappel du violet Ethica */
+                                border-left: 6px solid #8D40DA; /* Rappel du violet P&A */
                                 border-right: 1px solid rgba(229, 62, 62, 0.2);
                                 border-top: 1px solid rgba(229, 62, 62, 0.2);
                                 border-bottom: 1px solid rgba(229, 62, 62, 0.2);
@@ -409,11 +409,11 @@ def render_match(match, user_id):
                         
                         <div class="ethica-warning-box">
                             <div class="ethica-warning-header">
-                                🛑 Politique de Conformité & Valeurs du Groupe Ethica
+                                🛑 Politique de Conformité & Valeurs du Groupe P&A
                                                     </div>
                                                     <div class="ethica-warning-body">
                                                         Cette plateforme est un espace exclusivement conçu pour le <b>divertissement, le team building et la convivialité</b> entre collègues. 
-                                                        Conformément à la charte de conformité et aux politiques de responsabilité sociétale du <span class="ethica-highlight">Groupe Ethica</span>, 
+                                                        Conformément à la charte de conformité et aux politiques de responsabilité sociétale du <span class="ethica-highlight">Groupe P&A</span>, 
                                                         les paris financiers, les jeux d'argent réel ou l'évaluation de cotes marchandes sont <b>strictement interdits</b> au sein de nos outils d'entreprise.
                                                         <br><br>
                                                         Ici, notre seule et unique monnaie est la saine compétition, le défi tactique et la fierté de voir son nom briller au sommet du classement corporate ! 

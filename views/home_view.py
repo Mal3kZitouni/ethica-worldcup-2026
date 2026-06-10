@@ -12,7 +12,7 @@ def show():
     user_id = st.session_state.get("user_id")
     user_name = st.session_state.get("user_name")
     user_country = st.session_state.get("country", "")
-    user_team = st.session_state.get("team", "Ethica")
+    user_team = st.session_state.get("team", "P&A")
 
     # ==================================================
     # LAYOUT
@@ -36,7 +36,7 @@ def show():
                 margin-bottom:20px;
                 color:white;
             ">
-            <h1>🏆 Ethica World Cup 2026</h1>
+            <h1>🏆 P&A World Cup 2026</h1>
             <h3>{tr("Welcome")} {user_name}</h3>
             <p>
                 {tr("Predict matches")} •
@@ -62,7 +62,7 @@ def show():
         with col2:
             st.info(
                 f"👥 {tr('Team')}: "
-                f"{user_team if user_team else 'Ethica'}"
+                f"{user_team if user_team else 'P&A'}"
             )
 
         # ==================================================
