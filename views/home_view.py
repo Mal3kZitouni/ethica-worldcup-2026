@@ -7,6 +7,19 @@ from services.Chat_IA import render_chat_panel
 from services.translations import tr
 
 
+# ==================================================
+# POINTS REWARDS CONFIG (IMPORTANT FIX)
+# ==================================================
+POINTS_REWARDS = [
+    ("Group Stage", 15),
+    ("Round of 32", 12),
+    ("Round of 16", 10),
+    ("Quarter Finals", 7),
+    ("Semi Finals", 5),
+    ("Final", 3),
+]
+
+
 def show():
 
     user_id = st.session_state.get("user_id")
@@ -43,24 +56,63 @@ def show():
         )
 
         # ==================================================
-        # 🟣 POINTS REWARDS SECTION (NEW)
+        # 🟣 POINTS REWARDS SECTION (IMPROVED)
         # ==================================================
 
         st.markdown(f"### 🏆 {tr('Points Rewards System')}")
 
-        st.write(f"⚽ {tr('Exact Score')}: **5 {tr('points')}**")
-        st.write(f"🎯 {tr('Correct Result')}: **3 {tr('points')}**")
-        st.write(f"📊 {tr('Wrong prediction')}: **1 {tr('point')}**")
+        st.markdown(
+            """
+            <style>
+            .reward-card {
+                background: linear-gradient(135deg, #F7F3FF, #FFFFFF);
+                border: 1px solid #E6D8FA;
+                padding: 14px 16px;
+                border-radius: 14px;
+                margin-bottom: 8px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            }
 
-        st.divider()
+            .reward-title {
+                font-weight: 600;
+                color: #8D40DA;
+                margin-bottom: 6px;
+            }
 
-        st.write(f"🏆 {tr('Champion Bonus')}")
-        st.write(f"• {tr('Group Stage')}: 15 {tr('pts')}")
-        st.write(f"• {tr('Round of 32')}: 12 {tr('pts')}")
-        st.write(f"• {tr('Round of 16')}: 10 {tr('pts')}")
-        st.write(f"• {tr('Quarter Finals')}: 7 {tr('pts')}")
-        st.write(f"• {tr('Semi Finals')}: 5 {tr('pts')}")
-        st.write(f"• {tr('Final')}: 3 {tr('pts')}")
+            .reward-line {
+                margin: 4px 0;
+                font-size: 15px;
+            }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+
+        # Match points card
+        st.markdown(
+            f"""
+            <div class="reward-card">
+                <div class="reward-title">⚽ {tr('Match Points')}</div>
+                <div class="reward-line">⚽ {tr('Exact Score')}: <b>5 {tr('points')}</b></div>
+                <div class="reward-line">🎯 {tr('Correct Result')}: <b>3 {tr('points')}</b></div>
+                <div class="reward-line">📊 {tr('Wrong prediction')}: <b>1 {tr('point')}</b></div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+        # Bonus points cards (dynamic)
+        st.markdown(f"### 🏆 {tr('Champion Bonus')}")
+
+        for stage, points in POINTS_REWARDS:
+            st.markdown(
+                f"""
+                <div class="reward-card">
+                    <div class="reward-line">🏆 {tr(stage)}: <b>{points} {tr('pts')}</b></div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
 
         # ==================================================
         # PROFILE INFO
