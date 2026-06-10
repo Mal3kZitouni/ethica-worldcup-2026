@@ -20,7 +20,7 @@ from views import (
 # INIT SESSION
 # ----------------------
 st.set_page_config(
-    page_title="Ethica World Cup 2026",
+    page_title="P&A World Cup 2026",
     page_icon="🏆",
     layout="wide"
 )
@@ -130,7 +130,7 @@ if not st.session_state.get("authenticated", False):
     with login_tab:
 
         st.title(
-            f"🏆 {tr('Ethica World Cup 2026 Predictions')}"
+            f"🏆 {tr('P&A World Cup 2026 Predictions')}"
         )
 
         email = st.text_input(
@@ -193,7 +193,7 @@ if not st.session_state.get("authenticated", False):
 
         team = st.text_input(
             tr("Team"),
-            value="Ethica",
+            value="P&A",
             disabled=True
         )
 
@@ -266,10 +266,10 @@ else:
 
     with st.sidebar:
 
-        st.image(
-            "assets/ethica_logo.png",
-            width=180
-        )
+        #st.image(
+         #   "assets/ethica_logo.png",
+          #  width=180
+        #)
 
         st.markdown("---")
 
