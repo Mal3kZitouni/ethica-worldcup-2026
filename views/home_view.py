@@ -45,21 +45,22 @@ def show():
         # ==================================================
         # 🟣 POINTS REWARDS SECTION (NEW)
         # ==================================================
-        st.markdown("### 🏆 Points Rewards System")
 
-        st.write("⚽ Exact Score: **5 points**")
-        st.write("🎯 Correct Result: **3 points**")
-        st.write("📊 Wrong prediction: **1 point**")
+        st.markdown(f"### 🏆 {tr('Points Rewards System')}")
+
+        st.write(f"⚽ {tr('Exact Score')}: **5 {tr('points')}**")
+        st.write(f"🎯 {tr('Correct Result')}: **3 {tr('points')}**")
+        st.write(f"📊 {tr('Wrong prediction')}: **1 {tr('point')}**")
 
         st.divider()
 
-        st.write("🏆 Champion Bonus")
-        st.write("• Predicted at Group Stage: 15 pts")
-        st.write("• Predicted at Round of 32: 12 pts")
-        st.write("• Predicted at Round of 16: 10 pts")
-        st.write("• Predicted at Quarter Finals: 7 pts")
-        st.write("• Predicted at Semi Finals: 5 pts")
-        st.write("• Predicted at Final: 3 pts")
+        st.write(f"🏆 {tr('Champion Bonus')}")
+        st.write(f"• {tr('Group Stage')}: 15 {tr('pts')}")
+        st.write(f"• {tr('Round of 32')}: 12 {tr('pts')}")
+        st.write(f"• {tr('Round of 16')}: 10 {tr('pts')}")
+        st.write(f"• {tr('Quarter Finals')}: 7 {tr('pts')}")
+        st.write(f"• {tr('Semi Finals')}: 5 {tr('pts')}")
+        st.write(f"• {tr('Final')}: 3 {tr('pts')}")
 
         # ==================================================
         # PROFILE INFO
