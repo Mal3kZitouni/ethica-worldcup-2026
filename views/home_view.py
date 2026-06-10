@@ -95,30 +95,27 @@ def show():
                 <div class="reward-title">🥅 {tr('Match Points')}</div>
                 <div class="reward-line">⚽ {tr('Exact Score')}: <b>5 {tr('points')}</b></div>
                 <div class="reward-line">🎯 {tr('Correct Result')}: <b>3 {tr('points')}</b></div>
-                <div class="reward-line">❌ {tr('Wrong prediction')}: <b>1 {tr('point')}</b></div>
+                <div class="reward-line">❌ {tr('Wrong prediction')}: <b>1 {tr('pt')}</b></div>
             </div>
             """,
             unsafe_allow_html=True
         )
 
-        # Bonus points cards (dynamic)
-
-        st.markdown(
+        # Bonus points card
+                st.markdown(
             f"""
-            <div class="reward-title">🏆 {tr('Tournament Winner Prediction')}</div>
+            <div class="reward-card">
+                <div class="reward-title">⚽ {tr('Tournament Winner Prediction')}</div>
+                <div class="reward-line">⚽ {tr('Group Stage')}: <b>15 {tr('points')}</b></div>
+                <div class="reward-line">🏆 {tr('Round of 32')}: <b>12 {tr('points')}</b></div>
+                <div class="reward-line">🏆 {tr('Round of 16')}: <b>10 {tr('points')}</b></div>
+                <div class="reward-line">🏆 {tr('Quarter Finals')}: <b>7 {tr('points')}</b></div>
+                <div class="reward-line">🏆 {tr('Semi Finals')}: <b>5 {tr('points')}</b></div>
+                <div class="reward-line">🏆 {tr('Final')}: <b>3 {tr('points')}</b></div>
+            </div>
             """,
             unsafe_allow_html=True
         )
-
-            for stage, points in POINTS_REWARDS:
-                
-                    f"""
-                    <div class="reward-card">
-                        <div class="reward-line">🏆 {tr(stage)}: <b>{points} {tr('pts')}</b></div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-            )
 
         # ==================================================
         # PROFILE INFO
