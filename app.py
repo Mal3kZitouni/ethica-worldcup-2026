@@ -266,10 +266,10 @@ else:
 
     with st.sidebar:
 
-        #st.image(
-         #   "assets/ethica_logo.png",
-          #  width=180
-        #)
+        st.image(
+           "assets/panda.png",
+            width=200
+        )
 
         st.markdown("---")
 
