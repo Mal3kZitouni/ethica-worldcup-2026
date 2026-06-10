@@ -1,6 +1,11 @@
 from database.connection import SessionLocal
-from database.models import User, Prediction
+from database.models import (
+    User,
+    Prediction,
+    WinnerPrediction
+)
 from sqlalchemy import func
+
 
 
 def get_ranking(country=None):
@@ -13,9 +18,18 @@ def get_ranking(country=None):
             db.query(
                 User.name,
                 User.country,
-                func.coalesce(
-                    func.sum(Prediction.points_earned),
-                    0
+                (
+                    func.coalesce(
+                        func.sum(Prediction.points_earned),
+                        0
+                    )
+                    +
+                    func.coalesce(
+                        func.max(
+                            WinnerPrediction.bonus_points
+                        ),
+                        0
+                    )
                 ).label("points"),
                 func.count(
                     Prediction.id
@@ -24,6 +38,10 @@ def get_ranking(country=None):
             .outerjoin(
                 Prediction,
                 User.id == Prediction.user_id
+            )
+            .outerjoin(
+                WinnerPrediction,
+                User.id == WinnerPrediction.user_id
             )
             .filter(
                 User.role != "admin"
@@ -43,11 +61,20 @@ def get_ranking(country=None):
                 User.country
             )
             .order_by(
-                func.coalesce(
-                    func.sum(
-                        Prediction.points_earned
-                    ),
-                    0
+                (
+                    func.coalesce(
+                        func.sum(
+                            Prediction.points_earned
+                        ),
+                        0
+                    )
+                    +
+                    func.coalesce(
+                        func.max(
+                            WinnerPrediction.bonus_points
+                        ),
+                        0
+                    )
                 ).desc(),
                 func.count(
                     Prediction.id

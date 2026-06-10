@@ -5,9 +5,9 @@ def calculate_points(
     actual_away
 ):
     """
-    Exact score = 5 points
-    Correct winner/draw = 3 points
-    Wrong prediction = 0 points
+    Base prediction = 1 point
+    Exact score = 6 points total
+    Correct winner/draw = 4 points total
     """
 
     # Exact score
@@ -15,7 +15,7 @@ def calculate_points(
         predicted_home == actual_home
         and predicted_away == actual_away
     ):
-        return 5
+        return 6
 
     predicted_diff = predicted_home - predicted_away
     actual_diff = actual_home - actual_away
@@ -37,6 +37,6 @@ def calculate_points(
     )
 
     if predicted_result == actual_result:
-        return 3
+        return 4
 
-    return 0
+    return 1
