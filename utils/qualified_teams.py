@@ -1,63 +1,49 @@
 QUALIFIED_TEAMS = [
-    # Hosts
-    "United States",
-    "Canada",
-    "Mexico",
-
-    # AFC
-    "Australia",
-    "Iran",
-    "Japan",
-    "Korea Republic",
-    "Jordan",
-    "Uzbekistan",
-    "Saudi Arabia",
-    "Qatar",
-    "Iraq",
-
-    # CAF
     "Algeria",
-    "Cabo Verde",
-    "Congo DR",
-    "Egypt",
-    "Ghana",
-    "Côte d’Ivoire",
-    "Morocco",
-    "Senegal",
-    "South Africa",
-    "Tunisia",
-
-    # CONCACAF
-    "Curaçao",
-    "Haiti",
-    "Panama",
-
-    # CONMEBOL
     "Argentina",
-    "Brazil",
-    "Colombia",
-    "Ecuador",
-    "Paraguay",
-    "Uruguay",
-
-    # OFC
-    "New Zealand",
-
-    # UEFA
+    "Australia",
     "Austria",
     "Belgium",
     "Bosnia and Herzegovina",
+    "Brazil",
+    "Cabo Verde",
+    "Canada",
+    "Colombia",
+    "Congo DR",
     "Croatia",
+    "Curaçao",
     "Czechia",
+    "Ecuador",
+    "Egypt",
     "England",
     "France",
     "Germany",
+    "Ghana",
+    "Haiti",
+    "Iran",
+    "Iraq",
+    "Japan",
+    "Jordan",
+    "Korea Republic",
+    "Mexico",
+    "Morocco",
     "Netherlands",
+    "New Zealand",
     "Norway",
+    "Panama",
+    "Paraguay",
     "Portugal",
+    "Qatar",
+    "Saudi Arabia",
     "Scotland",
+    "Senegal",
+    "South Africa",
     "Spain",
     "Sweden",
     "Switzerland",
-    "Türkiye"
+    "Tunisia",
+    "Türkiye",
+    "United States",
+    "Uruguay",
+    "Uzbekistan"
 ]

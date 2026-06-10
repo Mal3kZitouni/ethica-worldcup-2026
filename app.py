@@ -184,8 +184,11 @@ if not st.session_state.get("authenticated", False):
             tr("Full Name")
         )
 
-        country = st.text_input(
-            tr("Country")
+        from utils.countries import COUNTRIES
+
+        country = st.selectbox(
+            tr("Country"),
+            COUNTRIES
         )
 
         team = st.text_input(

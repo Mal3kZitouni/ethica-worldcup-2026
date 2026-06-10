@@ -1,4 +1,5 @@
 import streamlit as st
+from utils.countries import COUNTRIES
 
 from services.user_service import (
     get_user_by_id,
@@ -43,11 +44,17 @@ def show():
         value=user.name or ""
     )
 
-    country = st.text_input(
-        tr("Country"),
-        value=user.country or ""
+    current_country = (
+        COUNTRIES.index(user.country)
+        if user.country in COUNTRIES
+        else 0
     )
 
+    country = st.selectbox(
+        tr("Country"),
+        COUNTRIES,
+        index=current_country
+    )
     # ----------------------
     # READ ONLY FIELDS
     # ----------------------
