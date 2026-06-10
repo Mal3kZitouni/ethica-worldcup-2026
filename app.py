@@ -268,8 +268,7 @@ else:
 
         st.image(
            "assets/panda.png",
-            width=250,
-            height=300
+            width=250
         )
 
         st.markdown("---")
