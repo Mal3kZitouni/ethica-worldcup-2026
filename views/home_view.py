@@ -102,7 +102,7 @@ def show():
         )
 
         # Bonus points card
-                st.markdown(
+        st.markdown(
             f"""
             <div class="reward-card">
                 <div class="reward-title">⚽ {tr('Tournament Winner Prediction')}</div>
