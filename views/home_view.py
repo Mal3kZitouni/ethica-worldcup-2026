@@ -45,34 +45,21 @@ def show():
         # ==================================================
         # 🟣 POINTS REWARDS SECTION (NEW)
         # ==================================================
-        st.markdown(
-            f"""
-            <div style="
-                background: #F7F3FF;
-                border: 1px solid #E6D8FA;
-                padding: 18px;
-                border-radius: 16px;
-                margin-bottom: 20px;
-            ">
-                <h3 style="color:#8D40DA;">🏆 {tr('Points Rewards System')}</h3>
+        st.markdown("### 🏆 Points Rewards System")
 
-                <p>⚽ <b>Exact Score:</b> 5 points</p>
-                <p>🎯 <b>Correct Result (winner/draw):</b> 3 points</p>
-                <p>📊 <b>Wrong prediction:</b> 1 point</p>
+        st.write("⚽ Exact Score: **5 points**")
+        st.write("🎯 Correct Result: **3 points**")
+        st.write("📊 Wrong prediction: **1 point**")
 
-                <hr style="margin:10px 0;">
+        st.divider()
 
-                <p>🏆 <b>Champion Bonus:</b></p>
-                <p>• Group Stage: 15 pts</p>
-                <p>• Round of 32: 12 pts</p>
-                <p>• Round of 16: 10 pts</p>
-                <p>• Quarter Finals: 7 pts</p>
-                <p>• Semi Finals: 5 pts</p>
-                <p>• Final: 3 pts</p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        st.write("🏆 Champion Bonus")
+        st.write("• Predicted at Group Stage: 15 pts")
+        st.write("• Predicted at Round of 32: 12 pts")
+        st.write("• Predicted at Round of 16: 10 pts")
+        st.write("• Predicted at Quarter Finals: 7 pts")
+        st.write("• Predicted at Semi Finals: 5 pts")
+        st.write("• Predicted at Final: 3 pts")
 
         # ==================================================
         # PROFILE INFO
@@ -166,7 +153,7 @@ def show():
 
             shown += 1
 
-            if shown >= 5:
+            if shown >= 3:
                 break
 
         # ==================================================
