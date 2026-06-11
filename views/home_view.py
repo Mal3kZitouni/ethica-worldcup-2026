@@ -214,7 +214,7 @@ def show():
     # ==================================================
     # AI CHAT PANEL
     # ==================================================
-    from services.CHAT_AI import render_chat_panel
+    from services.Chat_IA import render_chat_panel
 
     with st.expander(
         "🤖 Prophet AI - Football Analysis & Game Rules",
