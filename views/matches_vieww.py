@@ -120,9 +120,7 @@ def show():
     with col3:
 
         search = st.text_input(tr("Search Team"))
-    
-    # ==================================================
-    current_filters = (
+        current_filters = (
     selected_stage,
     selected_date,
     search
@@ -134,6 +132,8 @@ if (
 ):
     st.session_state.matches_page = 1
     st.session_state.last_filters = current_filters
+
+    # ==================================================
     # FILTER FUNCTION
     # ==================================================
     def match_filter(match):
@@ -184,7 +184,7 @@ if (
 
         filtered_matches.append(match)
 
-if not filtered_matches:
+    if not filtered_matches:
 
     st.success(tr("You have predicted all available matches."))
     return
