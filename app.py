@@ -277,62 +277,37 @@ else:
         st.markdown("---")
 
         menu_items = {
-            tr("Home"): "Home",
-            tr("Matches"): "Matches",
-            tr("My Predictions"): "Predictions",
-            tr("Tables"): "Tables",
-            tr("Rankings"): "Rankings",
-            tr("My Profile"): "Profile"
+            "Home": tr("Home"),
+            "Matches": tr("Matches"),
+            "Predictions": tr("My Predictions"),
+            "Tables": tr("Tables"),
+            "Rankings": tr("Rankings"),
+            "Profile": tr("My Profile")
         }
-
-        menu_labels = list(
-            menu_items.keys()
-        )
 
         if st.session_state.get("role") == "admin":
+            menu_items["Admin"] = tr("Administration")
 
-            admin_label = tr("Administration")
+        pages = list(menu_items.keys())
 
-            menu_items[
-                admin_label
-            ] = "Admin"
+        current_page = st.session_state.get(
+            "current_page",
+            "Home"
+        )
 
-            menu_labels.append(
-                admin_label
-            )
+        if current_page not in pages:
+            current_page = "Home"
 
-        reverse_menu = {
-            v: k
-            for k, v in menu_items.items()
-        }
+        selected_page = st.radio(
+            tr("Navigation"),
+            pages,
+            index=pages.index(current_page),
+            format_func=lambda x: menu_items[x]
+        )
 
-        default_index = 0
+        st.session_state.current_page = selected_page
 
-        if (
-            st.session_state.current_page
-            in reverse_menu
-        ):
-
-            selected_label = reverse_menu[
-                st.session_state.current_page
-            ]
-
-            if selected_label in menu_labels:
-
-                default_index = (
-                    menu_labels.index(
-                        selected_label
-                    )
-                )
-
-            page_selected = st.radio(
-                tr(" "),
-                menu_labels,
-                key="navigation_radio"
-            )
-
-            page = menu_items[page_selected]
-            st.session_state.current_page = page
+        page = selected_page
 
         st.markdown("---")
 
