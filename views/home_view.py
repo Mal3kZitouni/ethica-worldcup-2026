@@ -7,7 +7,7 @@ from services.translations import tr
 
 
 # ==================================================
-# POINTS REWARDS CONFIG
+# POINTS REWARDS CONFIG (IMPORTANT FIX)
 # ==================================================
 POINTS_REWARDS = [
     ("Group Stage", 15),
@@ -17,12 +17,6 @@ POINTS_REWARDS = [
     ("Semi Finals", 5),
     ("Final", 3),
 ]
-
-MATCH_POINTS = {
-    "exact": 5,
-    "correct": 3,
-    "wrong": 1
-}
 
 
 def show():
@@ -61,8 +55,9 @@ def show():
         )
 
         # ==================================================
-        # 🟣 POINTS REWARDS SECTION
+        # 🟣 POINTS REWARDS SECTION (IMPROVED)
         # ==================================================
+
         st.markdown(f"### 🏆 {tr('Points Rewards System')}")
 
         st.markdown(
@@ -92,35 +87,36 @@ def show():
             unsafe_allow_html=True
         )
 
-        # ✅ Match points card (dynamic)
+        # Match points card
         st.markdown(
             f"""
             <div class="reward-card">
                 <div class="reward-title">🥅 {tr('Matches Points')}</div>
-                <div class="reward-line">⚽ {tr('Exact Score')}: <b>{MATCH_POINTS['exact']} {tr('points')}</b></div>
-                <div class="reward-line">🎯 {tr('Correct Result')}: <b>{MATCH_POINTS['correct']} {tr('points')}</b></div>
-                <div class="reward-line">❌ {tr('Wrong prediction')}: <b>{MATCH_POINTS['wrong']} {tr('point')}</b></div>
+                <div class="reward-line">⚽ {tr('Exact Score')}: <b>5 {tr('points')}</b></div>
+                <div class="reward-line">🎯 {tr('Correct Result')}: <b>3 {tr('points')}</b></div>
+                <div class="reward-line">❌ {tr('Wrong prediction')}: <b>1 {tr('point')}</b></div>
             </div>
             """,
             unsafe_allow_html=True
         )
 
-        # ✅ Bonus points card (dynamic from config)
-        bonus_lines = "".join([
-            f'<div class="reward-line">🏆 {tr(stage)}: <b>{points} {tr("points")}</b></div>'
-            for stage, points in POINTS_REWARDS
-        ])
-
+        # Bonus points card
         st.markdown(
             f"""
             <div class="reward-card">
                 <div class="reward-title">⚽ {tr('Tournament Winner Prediction')}</div>
-                {bonus_lines}
+                <div class="reward-line">🏆 {tr('Group Stage')}: <b>15 {tr('points')}</b></div>
+                <div class="reward-line">🏆 {tr('Round of 32')}: <b>12 {tr('points')}</b></div>
+                <div class="reward-line">🏆 {tr('Round of 16')}: <b>10 {tr('points')}</b></div>
+                <div class="reward-line">🏆 {tr('Quarter Finals')}: <b>7 {tr('points')}</b></div>
+                <div class="reward-line">🏆 {tr('Semi Finals')}: <b>5 {tr('points')}</b></div>
+                <div class="reward-line">🏆 {tr('Final')}: <b>3 {tr('points')}</b></div>
             </div>
             """,
             unsafe_allow_html=True
         )
 
+        # =================================================
         # ==================================================
         # USER RANKING
         # ==================================================
@@ -183,12 +179,7 @@ def show():
 
         for position, player in enumerate(top5, start=1):
 
-            medal = (
-                "🥇" if position == 1 else
-                "🥈" if position == 2 else
-                "🥉" if position == 3 else
-                f"#{position}"
-            )
+            medal = "🥇" if position == 1 else "🥈" if position == 2 else "🥉" if position == 3 else f"#{position}"
 
             st.write(
                 f"{medal} {player.name} — {player.points} {tr('pts')}"
