@@ -189,147 +189,147 @@ def show():
     st.success(tr("You have predicted all available matches."))
     return
 
-# ==================================================
-# PAGINATION
-# ==================================================
-if "matches_page" not in st.session_state:
-    st.session_state.matches_page = 1
+    # ==================================================
+    # PAGINATION
+    # ==================================================
+    if "matches_page" not in st.session_state:
+        st.session_state.matches_page = 1
 
-matches_per_page = 5
+    matches_per_page = 5
 
-total_pages = (
-    len(filtered_matches) + matches_per_page - 1
-) // matches_per_page
+    total_pages = (
+        len(filtered_matches) + matches_per_page - 1
+    ) // matches_per_page
 
-col_prev, col_info, col_next = st.columns([1, 2, 1])
+    col_prev, col_info, col_next = st.columns([1, 2, 1])
 
-with col_prev:
-    if (
-        st.button("⬅ Previous")
-        and st.session_state.matches_page > 1
-    ):
-        st.session_state.matches_page -= 1
-        st.rerun()
+    with col_prev:
+        if (
+            st.button("⬅ Previous")
+            and st.session_state.matches_page > 1
+        ):
+            st.session_state.matches_page -= 1
+            st.rerun()
 
-with col_next:
-    if (
-        st.button("Next ➡")
-        and st.session_state.matches_page < total_pages
-    ):
-        st.session_state.matches_page += 1
-        st.rerun()
+    with col_next:
+        if (
+            st.button("Next ➡")
+            and st.session_state.matches_page < total_pages
+        ):
+            st.session_state.matches_page += 1
+            st.rerun()
 
-with col_info:
-    st.markdown(
-        f"<div style='text-align:center;'>Page "
-        f"{st.session_state.matches_page} / {total_pages}</div>",
-        unsafe_allow_html=True
-    )
-
-start = (
-    (st.session_state.matches_page - 1)
-    * matches_per_page
-)
-end = start + matches_per_page
-
-filtered_matches = filtered_matches[start:end]
-
-# ==================================================
-# DISPLAY MATCHES
-# ==================================================
-for match in filtered_matches:
-
-    render_match(match, user_id)
-
-
-# ----------------------
-# MATCH CARD
-# ----------------------
-def render_match(match, user_id):
-
-    st.markdown("---")
-
-    try:
-        formatted_date = (
-            match.match_date.strftime("%Y-%m-%d %H:%M") + " GMT"
+    with col_info:
+        st.markdown(
+            f"<div style='text-align:center;'>Page "
+            f"{st.session_state.matches_page} / {total_pages}</div>",
+            unsafe_allow_html=True
         )
-    except Exception:
-        formatted_date = str(match.match_date)
+
+    start = (
+        (st.session_state.matches_page - 1)
+        * matches_per_page
+    )
+    end = start + matches_per_page
+
+    filtered_matches = filtered_matches[start:end]
 
     # ==================================================
-    # TEAMS
+    # DISPLAY MATCHES
     # ==================================================
-    # ==================================================
-    # TEAMS
-    # ==================================================
-    col1, col2, col3 = st.columns([5, 2, 5])
+    for match in filtered_matches:
 
-    with col1:
+        render_match(match, user_id)
+
+
+    # ----------------------
+    # MATCH CARD
+    # ----------------------
+    def render_match(match, user_id):
+
+        st.markdown("---")
+
+        try:
+            formatted_date = (
+                match.match_date.strftime("%Y-%m-%d %H:%M") + " GMT"
+            )
+        except Exception:
+            formatted_date = str(match.match_date)
+
+        # ==================================================
+        # TEAMS
+        # ==================================================
+        # ==================================================
+        # TEAMS
+        # ==================================================
+        col1, col2, col3 = st.columns([5, 2, 5])
+
+        with col1:
+            st.markdown(
+                f"""
+                <div style="
+                    text-align:center;
+                    display:flex;
+                    flex-direction:column;
+                    align-items:center;
+                ">
+                    <img src="{get_flag_url(match.home_team)}"
+                        width="120"
+                        style="margin-bottom:10px;">
+                    <h2 style="margin:0;">
+                        {match.home_team}
+                    </h2>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        with col2:
+            st.markdown(
+                """
+                <div style="
+                    text-align:center;
+                    padding-top:55px;
+                ">
+                    <h1>VS</h1>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        with col3:
+            st.markdown(
+                f"""
+                <div style="
+                    text-align:center;
+                    display:flex;
+                    flex-direction:column;
+                    align-items:center;
+                ">
+                    <img src="{get_flag_url(match.away_team)}"
+                        width="120"
+                        style="margin-bottom:10px;">
+                    <h2 style="margin:0;">
+                        {match.away_team}
+                    </h2>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        # ==================================================
+        # MATCH INFO
+        # ==================================================
         st.markdown(
             f"""
-            <div style="
-                text-align:center;
-                display:flex;
-                flex-direction:column;
-                align-items:center;
-            ">
-                <img src="{get_flag_url(match.home_team)}"
-                    width="120"
-                    style="margin-bottom:10px;">
-                <h2 style="margin:0;">
-                    {match.home_team}
-                </h2>
+            <div style="text-align:center; margin-top:10px; margin-bottom:15px;">
+                <h4>🏆 {tr(match.stage)}</h4>
+                <p>📅 {formatted_date}</p>
+                <p>🏟 {match.stadium} - {match.city}</p>
             </div>
             """,
             unsafe_allow_html=True
         )
-
-    with col2:
-        st.markdown(
-            """
-            <div style="
-                text-align:center;
-                padding-top:55px;
-            ">
-                <h1>VS</h1>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-    with col3:
-        st.markdown(
-            f"""
-            <div style="
-                text-align:center;
-                display:flex;
-                flex-direction:column;
-                align-items:center;
-            ">
-                <img src="{get_flag_url(match.away_team)}"
-                    width="120"
-                    style="margin-bottom:10px;">
-                <h2 style="margin:0;">
-                    {match.away_team}
-                </h2>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-    # ==================================================
-    # MATCH INFO
-    # ==================================================
-    st.markdown(
-        f"""
-        <div style="text-align:center; margin-top:10px; margin-bottom:15px;">
-            <h4>🏆 {tr(match.stage)}</h4>
-            <p>📅 {formatted_date}</p>
-            <p>🏟 {match.stadium} - {match.city}</p>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
 
     # ==================================================
     # PREDICTION FORM
