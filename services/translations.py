@@ -26,7 +26,8 @@ CUSTOM_TRANSLATIONS = {
     "My Profile": "Mon profil",
     "Administration": "Administration",
     "Welcome": "Bienvenue",
-    "point": "point"
+    "point": "point",
+    "Matches Points": "Points des matchs"
 }
 
 
