@@ -95,9 +95,9 @@ def show():
                     🥅 {tr('Matches Points')}
                 </div>
 
-                <p class="reward-line">
-                    💡 {'Predictions can be created or updated until the match kicks off.'}
-                </p>
+                <div class="reward-line">
+                    💡 {tr('Predictions can be created or updated until the match kicks off.')}
+                </div>
 
                 <div class="reward-line">
                     ⚽ {tr('Exact Score')}: <b>5 {tr('points')}</b>
@@ -124,7 +124,7 @@ def show():
                 </div>
 
                 <p class="reward-line">
-                    💡 {'The earlier you choose your champion, the more bonus points you can earn if your prediction is correct.'}
+                    💡 {tr('The earlier you choose your champion, the more bonus points you can earn if your prediction is correct.')}
                 </p>
 
                 <div class="reward-line">
