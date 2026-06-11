@@ -118,7 +118,7 @@ def show():
                 <div class="reward-line">🏆 {tr('Quarter Finals')}: <b>7 {tr('points')}</b></div>
                 <div class="reward-line">🏆 {tr('Semi Finals')}: <b>5 {tr('points')}</b></div>
                 <div class="reward-line">🏆 {tr('Final')}: <b>3 {tr('points')}</b></div>
-            </div>
+                <div  class="reward-line">   {tr('The earlier you choose your champion, the more bonus points you can earn if your prediction is correct.')}</div>
             """,
             unsafe_allow_html=True
         )
