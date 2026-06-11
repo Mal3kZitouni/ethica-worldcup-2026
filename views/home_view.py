@@ -96,7 +96,7 @@ def show():
                 </div>
 
                 <p class="reward-line">
-                    💡 {tr('Predictions can be created or updated until the match kicks off.')}
+                    💡 {'Predictions can be created or updated until the match kicks off.'}
                 </p>
 
                 <div class="reward-line">
@@ -124,7 +124,7 @@ def show():
                 </div>
 
                 <p class="reward-line">
-                    💡 {tr('The earlier you choose your champion, the more bonus points you can earn if your prediction is correct.')}
+                    💡 {'The earlier you choose your champion, the more bonus points you can earn if your prediction is correct.'}
                 </p>
 
                 <div class="reward-line">
