@@ -1,14 +1,14 @@
 import uuid
 
 from sqlalchemy import (
-    Column,
-    String,
-    Integer,
-    Boolean,
-    DateTime,
-    ForeignKey,
-    UniqueConstraint
-)
+        Column,
+        String,
+        Integer,
+        Boolean,
+        DateTime,
+        ForeignKey,
+        UniqueConstraint
+    )
 
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
@@ -19,6 +19,7 @@ from database.connection import Base
 
 class User(Base):
     __tablename__ = "users"
+    __table_args__ = {"extend_existing": True}
 
     id = Column(
         UUID(as_uuid=True),
@@ -78,6 +79,7 @@ class User(Base):
 
 class Match(Base):
     __tablename__ = "matches"
+    __table_args__ = {"extend_existing": True}
 
     id = Column(
         UUID(as_uuid=True),
@@ -150,16 +152,14 @@ class Match(Base):
 
 
 
+
 class Prediction(Base):
     __tablename__ = "predictions"
-
     __table_args__ = (
-        UniqueConstraint(
-            "user_id",
-            "match_id",
-            name="uq_user_match"
-        ),
+        UniqueConstraint("user_id", "match_id", name="uq_user_match"),
+        {"extend_existing": True}  # ✅ correct place
     )
+
 
     id = Column(
         UUID(as_uuid=True),
@@ -238,6 +238,7 @@ class Prediction(Base):
 
 class WinnerPrediction(Base):
     __tablename__ = "winner_predictions"
+    __table_args__ = {"extend_existing": True}
 
     id = Column(
         UUID(as_uuid=True),
