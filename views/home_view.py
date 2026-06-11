@@ -220,7 +220,7 @@ def show():
     col1, col2, col3 = st.columns([8, 1, 1])
 
     with col3:
-        if st.button("🤖", key="home_ai_button"):
+        if st.button("🤖 P&A AI", key="home_ai_button"):
             st.session_state.show_ai_chat = (
                 not st.session_state.show_ai_chat
             )
