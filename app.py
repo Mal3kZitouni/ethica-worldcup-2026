@@ -131,24 +131,27 @@ if not st.session_state.get("authenticated", False):
             f"🏆 {tr('P&A World Cup 2026 Predictions')}"
         )
 
-        email = st.text_input(
-            tr("Email Address"),
-            key="login_email"
-        )
+        with st.form("login_form"):
 
-        password = st.text_input(
-            tr("Password"),
-            type="password",
-            key="login_password"
-        )
+            email = st.text_input(
+                tr("Email Address"),
+                key="login_email"
+            )
 
-        if st.button(
-            tr("Login"),
-            key="login_button"
-        ):
+            password = st.text_input(
+                tr("Password"),
+                type="password",
+                key="login_password"
+            )
+
+            submitted = st.form_submit_button(
+                tr("Login")
+            )
+
+        if submitted:
 
             user = authenticate_user(
-                email,
+                email.strip().lower(),
                 password
             )
 

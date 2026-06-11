@@ -8,10 +8,16 @@ from utils.security import verify_password
 # ----------------------
 def authenticate_user(email, password):
 
+    email = email.strip().lower()
+
     db = SessionLocal()
 
     try:
-        user = db.query(User).filter(User.email == email).first()
+        user = (
+            db.query(User)
+            .filter(User.email == email)
+            .first()
+        )
 
         if not user:
             return None

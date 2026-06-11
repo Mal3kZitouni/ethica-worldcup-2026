@@ -11,12 +11,14 @@ def register_user(
     team
 ):
 
+    email = email.strip().lower()
+
     db = SessionLocal()
 
     try:
 
         # Only Ethica emails allowed
-        if not email.lower().endswith("@groupe-ethica.com"):
+        if not email.endswith("@groupe-ethica.com"):
             return (
                 False,
                 "Only @groupe-ethica.com email addresses are allowed"
