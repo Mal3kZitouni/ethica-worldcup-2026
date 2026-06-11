@@ -209,9 +209,22 @@ def render_match(match, user_id):
     with col1:
         st.markdown(
             f"""
-            <div style="text-align:center;">
-                <img src="{get_flag_url(match.home_team)}" width="120">
-                <h3>{match.home_team}</h3>
+            <div style="
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+                justify-content:center;
+            ">
+                <img src="{get_flag_url(match.home_team)}"
+                    style="width:120px;height:auto;">
+                <div style="
+                    text-align:center;
+                    margin-top:10px;
+                    font-size:24px;
+                    font-weight:600;
+                ">
+                    {match.home_team}
+                </div>
             </div>
             """,
             unsafe_allow_html=True
@@ -230,14 +243,26 @@ def render_match(match, user_id):
     with col3:
         st.markdown(
             f"""
-            <div style="text-align:center;">
-                <img src="{get_flag_url(match.away_team)}" width="120">
-                <h3>{match.away_team}</h3>
+            <div style="
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+                justify-content:center;
+            ">
+                <img src="{get_flag_url(match.away_team)}"
+                    style="width:120px;height:auto;">
+                <div style="
+                    text-align:center;
+                    margin-top:10px;
+                    font-size:24px;
+                    font-weight:600;
+                ">
+                    {match.away_team}
+                </div>
             </div>
             """,
             unsafe_allow_html=True
         )
-
     # ==================================================
     # MATCH INFO
     # ==================================================
