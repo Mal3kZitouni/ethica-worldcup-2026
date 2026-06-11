@@ -107,7 +107,10 @@ with st.sidebar:
         if "Français" in selected_lang
         else "en"
     )
-
+    st.sidebar.write(
+    "Before change:",
+    st.session_state.get("current_page")
+                        )
     if new_lang != st.session_state.lang:
         st.session_state.lang = new_lang
         st.rerun()
@@ -317,6 +320,7 @@ else:
     # ==================================================
     # ROUTING
     # ==================================================
+    st.write("Current page:", st.session_state.get("current_page"))
     if page == "Home":
         home_view.show()
 
