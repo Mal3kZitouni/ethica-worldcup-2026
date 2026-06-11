@@ -3,7 +3,7 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 import streamlit as st
 import os
 
-# Streamlit Cloud secrets first
+# Streamlit Cloud secrets first, local .env fallback
 try:
     DATABASE_URL = st.secrets["DATABASE_URL"]
 except Exception:
