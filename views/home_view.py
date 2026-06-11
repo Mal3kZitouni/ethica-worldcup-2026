@@ -92,6 +92,11 @@ def show():
             f"""
             <div class="reward-card">
                 <div class="reward-title">🥅 {tr('Matches Points')}</div>
+
+                <div class="reward-line">
+                    ℹ️ {tr('You can create or modify your match prediction only before kickoff.')}
+                </div>
+
                 <div class="reward-line">⚽ {tr('Exact Score')}: <b>5 {tr('points')}</b></div>
                 <div class="reward-line">🎯 {tr('Correct Result')}: <b>3 {tr('points')}</b></div>
                 <div class="reward-line">❌ {tr('Wrong prediction')}: <b>1 {tr('point')}</b></div>
@@ -105,6 +110,11 @@ def show():
             f"""
             <div class="reward-card">
                 <div class="reward-title">⚽ {tr('Tournament Winner Prediction')}</div>
+
+                <div class="reward-line">
+                    ℹ️ {tr('The earlier you choose your champion, the more bonus points you can earn if your prediction is correct.')}
+                </div>
+
                 <div class="reward-line">🏆 {tr('Group Stage')}: <b>15 {tr('points')}</b></div>
                 <div class="reward-line">🏆 {tr('Round of 32')}: <b>12 {tr('points')}</b></div>
                 <div class="reward-line">🏆 {tr('Round of 16')}: <b>10 {tr('points')}</b></div>
