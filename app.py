@@ -29,9 +29,7 @@ initialize_session()
 
 if "lang" not in st.session_state:
     st.session_state.lang = "fr"
-if "current_page" not in st.session_state:
 
-    st.session_state.current_page = "Home"
 
 
 
@@ -107,10 +105,7 @@ with st.sidebar:
         if "Français" in selected_lang
         else "en"
     )
-    st.sidebar.write(
-    "Before change:",
-    st.session_state.get("current_page")
-                        )
+                        
     if new_lang != st.session_state.lang:
         st.session_state.lang = new_lang
         st.rerun()
@@ -302,9 +297,7 @@ else:
             tr(""),
             pages,
             format_func=lambda x: menu_items[x],
-            index=pages.index(
-                st.session_state.get("current_page", "Home")
-            )
+            key="current_page"
         )
 
         st.session_state.current_page = page
