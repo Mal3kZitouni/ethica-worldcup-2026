@@ -4,7 +4,7 @@ from services.match_service import load_matches
 from services.ranking_service import get_ranking
 from services.Chat_IA import render_chat_panel
 from services.translations import tr
-from services.country_flags import get_flag_url
+
 
 # ==================================================
 # POINTS REWARDS CONFIG (IMPORTANT FIX)
@@ -156,24 +156,7 @@ def show():
                 mc1, mc2 = st.columns([3, 2])
 
                 with mc1:
-
-                    col_a, col_b = st.columns([5, 2])
-
-                    with col_a:
-
-                        team1, vs_col, team2 = st.columns([2, 1, 2])
-
-                        with team1:
-                            st.image(get_flag_url(match.home_team), width=80)
-                            st.write(match.home_team)
-
-                        with vs_col:
-                            st.markdown("## VS")
-
-                        with team2:
-                            st.image(get_flag_url(match.away_team), width=80)
-                            st.write(match.away_team)
-
+                    st.markdown(f"### {match.home_team} vs {match.away_team}")
                     st.caption(f"🏆 {match.stage}")
 
                 with mc2:
