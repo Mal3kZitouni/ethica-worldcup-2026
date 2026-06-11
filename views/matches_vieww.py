@@ -210,7 +210,7 @@ def render_match(match, user_id):
         st.markdown(
             f"""
             <div style="text-align:center;">
-                <img src="{get_flag_url(match.home_team)}" width="60">
+                <img src="{get_flag_url(match.home_team)}" width="120">
                 <h3>{match.home_team}</h3>
             </div>
             """,
@@ -231,7 +231,7 @@ def render_match(match, user_id):
         st.markdown(
             f"""
             <div style="text-align:center;">
-                <img src="{get_flag_url(match.away_team)}" width="60">
+                <img src="{get_flag_url(match.away_team)}" width="120">
                 <h3>{match.away_team}</h3>
             </div>
             """,
