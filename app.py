@@ -31,8 +31,6 @@ if "lang" not in st.session_state:
     st.session_state.lang = "fr"
 
 
-
-
 st.markdown("""
 <style>
 
@@ -87,35 +85,35 @@ div[role="radiogroup"]{
 # ==================================================
 # GLOBAL LANGUAGE SELECTOR
 # ==================================================
+with st.sidebar:
 
+    st.markdown(f"##### 🌐 {tr('Application Language')}")
+
+    selected_lang = st.radio(
+        "",
+        ["🇫🇷 Français", "🇬🇧 English"],
+        horizontal=True,
+        label_visibility="collapsed",
+        index=0 if st.session_state.lang == "fr" else 1,
+        key="language_selector"
+    )
+
+    new_lang = (
+        "fr"
+        if "Français" in selected_lang
+        else "en"
+    )
+
+    if new_lang != st.session_state.lang:
+        st.session_state.lang = new_lang
+        st.rerun()
+
+    st.markdown("---")
 
 # ==================================================
 # LOGIN / SIGNUP
 # ==================================================
 if not st.session_state.get("authenticated", False):
-
-    with st.sidebar:
-
-            st.markdown(f"##### 🌐 {tr('Application Language')}")
-
-            selected_lang = st.radio(
-                "",
-                ["🇫🇷 Français", "🇬🇧 English"],
-                horizontal=True,
-                label_visibility="collapsed",
-                index=0 if st.session_state.lang == "fr" else 1,
-                key="language_selector_login"
-            )
-
-            new_lang = (
-                "fr"
-                if "Français" in selected_lang
-                else "en"
-            )
-
-            if new_lang != st.session_state.lang:
-                st.session_state.lang = new_lang
-                st.rerun()
 
     login_tab, signup_tab = st.tabs(
         [
@@ -268,28 +266,6 @@ if not st.session_state.get("authenticated", False):
 else:
 
     with st.sidebar:
-        st.markdown(f"##### 🌐 {tr('Application Language')}")
-
-        selected_lang = st.radio(
-            "",
-            ["🇫🇷 Français", "🇬🇧 English"],
-            horizontal=True,
-            label_visibility="collapsed",
-            index=0 if st.session_state.lang == "fr" else 1,
-            key="language_selector"
-        )
-
-        new_lang = (
-            "fr"
-            if "Français" in selected_lang
-            else "en"
-        )
-
-        if new_lang != st.session_state.lang:
-            st.session_state.lang = new_lang
-            st.rerun()
-
-        st.markdown("---")
 
         left, center, right = st.columns([1, 3, 1])
 
@@ -315,27 +291,12 @@ else:
 
         pages = list(menu_items.keys())
 
-        if "current_page" not in st.session_state:
-            st.session_state["current_page"] = "Home"
-
-        default_index = 0
-
-        if st.session_state["current_page"] in pages:
-            default_index = pages.index(
-                st.session_state["current_page"]
-            )
-
         page = st.radio(
-            tr(""),
-            pages,
-            format_func=lambda x: menu_items[x],
-            index=default_index,
-            key="page_selector"
-        )
-
-        st.session_state["current_page"] = page
-
-        
+                    tr(""),
+                    pages,
+                    format_func=lambda x: menu_items[x],
+                    key="current_page"
+)
 
         st.markdown("---")
 
@@ -348,7 +309,6 @@ else:
     # ==================================================
     # ROUTING
     # ==================================================
-    st.write("Current page:", st.session_state.get("current_page"))
     if page == "Home":
         home_view.show()
 
