@@ -214,7 +214,19 @@ def show():
     # FLOATING AI CHAT (HOME ONLY)
     # ==================================================
 
+    if "show_ai_chat" not in st.session_state:
+        st.session_state.show_ai_chat = False
 
-@st.dialog("🤖 Prophet AI")
-def ai_dialog():
-    render_chat_panel()
+    col1, col2, col3 = st.columns([8, 1, 1])
+
+    with col3:
+        if st.button("🤖", key="home_ai_button"):
+            st.session_state.show_ai_chat = (
+                not st.session_state.show_ai_chat
+            )
+
+    if st.session_state.show_ai_chat:
+
+        st.markdown("---")
+
+        render_chat_panel()
