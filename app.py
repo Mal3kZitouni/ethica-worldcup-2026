@@ -30,6 +30,8 @@ initialize_session()
 if "lang" not in st.session_state:
     st.session_state.lang = "fr"
 
+if "current_page" not in st.session_state:
+    st.session_state.current_page = "Home"
 
 st.markdown("""
 <style>
@@ -131,27 +133,24 @@ if not st.session_state.get("authenticated", False):
             f"🏆 {tr('P&A World Cup 2026 Predictions')}"
         )
 
-        with st.form("login_form"):
+        email = st.text_input(
+            tr("Email Address"),
+            key="login_email"
+        )
 
-            email = st.text_input(
-                tr("Email Address"),
-                key="login_email"
-            )
+        password = st.text_input(
+            tr("Password"),
+            type="password",
+            key="login_password"
+        )
 
-            password = st.text_input(
-                tr("Password"),
-                type="password",
-                key="login_password"
-            )
-
-            submitted = st.form_submit_button(
-                tr("Login")
-            )
-
-        if submitted:
+        if st.button(
+            tr("Login"),
+            key="login_button"
+        ):
 
             user = authenticate_user(
-                email.strip().lower(),
+                email,
                 password
             )
 
@@ -291,12 +290,24 @@ else:
 
         pages = list(menu_items.keys())
 
-        page = st.radio(
-                    tr(""),
-                    pages,
-                    format_func=lambda x: menu_items[x],
-                    key="current_page"
-)
+        current_page = st.session_state.get(
+            "current_page",
+            "Home"
+        )
+
+        if current_page not in pages:
+            current_page = "Home"
+
+        selected_page = st.radio(
+            tr(""),
+            pages,
+            index=pages.index(current_page),
+            format_func=lambda x: menu_items[x]
+        )
+
+        st.session_state.current_page = selected_page
+
+        page = selected_page
 
         st.markdown("---")
 
