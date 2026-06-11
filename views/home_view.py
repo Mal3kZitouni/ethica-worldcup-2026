@@ -4,6 +4,7 @@ from services.match_service import load_matches
 from services.ranking_service import get_ranking
 from services.Chat_IA import render_chat_panel
 from services.translations import tr
+from services.CHAT_AI import open_ai_dialog
 
 
 # ==================================================
@@ -213,20 +214,20 @@ def show():
     # ==================================================
     # FLOATING AI CHAT (HOME ONLY)
     # ==================================================
+    st.markdown("""
+    <style>
+    div[data-testid="stButton"] button {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        font-size: 30px;
+        z-index: 9999;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
-    if "show_ai_chat" not in st.session_state:
-        st.session_state.show_ai_chat = False
-
-    col1, col2, col3 = st.columns([8, 1, 1])
-
-    with col3:
-        if st.button("🤖", key="home_ai_button"):
-            st.session_state.show_ai_chat = (
-                not st.session_state.show_ai_chat
-            )
-
-    if st.session_state.show_ai_chat:
-
-        st.markdown("---")
-
-        render_chat_panel()
+    if st.button("🤖", key="open_prophet_ai"):
+        open_ai_dialog()

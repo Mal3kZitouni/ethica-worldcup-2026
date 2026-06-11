@@ -141,3 +141,7 @@ def render_chat_panel():
                     
                 except Exception as e:
                     st.error(f"❌ Erreur : {str(e)}")
+
+    @st.dialog("🤖 Prophet AI")
+    def open_ai_dialog():
+        render_chat_panel()
