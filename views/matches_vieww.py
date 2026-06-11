@@ -7,6 +7,7 @@ from services.prediction_service import (
 )
 from services.country_flags import get_flag_url
 from services.translations import tr
+from datetime import datetime, timezone
 
 
 # ----------------------
@@ -156,9 +157,15 @@ def show():
     # ==================================================
     filtered_matches = []
 
+    now = datetime.now(timezone.utc)
+
     for match in matches:
 
         if not match_filter(match):
+            continue
+
+        # Hide matches that already started
+        if match.match_date <= now:
             continue
 
         if (
@@ -171,11 +178,6 @@ def show():
             continue
 
         filtered_matches.append(match)
-
-    if not filtered_matches:
-
-        st.success(tr("You have predicted all available matches."))
-        return
 
     # ==================================================
     # DISPLAY MATCHES
