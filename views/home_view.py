@@ -95,9 +95,6 @@ def show():
                     🥅 {tr('Matches Points')}
                 </div>
 
-                <div class="reward-line">
-                    💡 {tr('Predictions can be created or updated until the match kicks off.')}
-                </div>
 
                 <div class="reward-line">
                     ⚽ {tr('Exact Score')}: <b>5 {tr('points')}</b>
