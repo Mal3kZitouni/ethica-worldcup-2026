@@ -299,7 +299,7 @@ else:
             current_page = "Home"
 
         selected_page = st.radio(
-            tr("Navigation"),
+            tr(""),
             pages,
             index=pages.index(current_page),
             format_func=lambda x: menu_items[x]

@@ -202,14 +202,26 @@ def render_match(match, user_id):
     # ==================================================
     # TEAMS
     # ==================================================
+    # ==================================================
+    # TEAMS
+    # ==================================================
     col1, col2, col3 = st.columns([5, 2, 5])
 
     with col1:
         st.markdown(
             f"""
-            <div style="text-align:center;">
-                <img src="{get_flag_url(match.home_team)}" width="60">
-                <h3>{match.home_team}</h3>
+            <div style="
+                text-align:center;
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+            ">
+                <img src="{get_flag_url(match.home_team)}"
+                    width="120"
+                    style="margin-bottom:10px;">
+                <h2 style="margin:0;">
+                    {match.home_team}
+                </h2>
             </div>
             """,
             unsafe_allow_html=True
@@ -218,8 +230,11 @@ def render_match(match, user_id):
     with col2:
         st.markdown(
             """
-            <div style="text-align:center; padding-top:40px;">
-                <h2>VS</h2>
+            <div style="
+                text-align:center;
+                padding-top:55px;
+            ">
+                <h1>VS</h1>
             </div>
             """,
             unsafe_allow_html=True
@@ -228,9 +243,18 @@ def render_match(match, user_id):
     with col3:
         st.markdown(
             f"""
-            <div style="text-align:center;">
-                <img src="{get_flag_url(match.away_team)}" width="60">
-                <h3>{match.away_team}</h3>
+            <div style="
+                text-align:center;
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+            ">
+                <img src="{get_flag_url(match.away_team)}"
+                    width="120"
+                    style="margin-bottom:10px;">
+                <h2 style="margin:0;">
+                    {match.away_team}
+                </h2>
             </div>
             """,
             unsafe_allow_html=True
