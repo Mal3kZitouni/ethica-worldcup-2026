@@ -25,7 +25,7 @@ CUSTOM_TRANSLATIONS = {
     "Rankings": "Classement",
     "My Profile": "Mon profil",
     "Administration": "Administration",
-    "Welcome": "Bienvenue"
+    "Welcome": "Bienvenue",
     "point": "point"
 }
 
