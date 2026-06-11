@@ -91,10 +91,10 @@ def show():
         st.markdown(
             f"""
             <div class="reward-card">
-                <div class="reward-title">🥅 {tr('Match Points')}</div>
+                <div class="reward-title">🥅 {tr('Matches Points')}</div>
                 <div class="reward-line">⚽ {tr('Exact Score')}: <b>5 {tr('points')}</b></div>
                 <div class="reward-line">🎯 {tr('Correct Result')}: <b>3 {tr('points')}</b></div>
-                <div class="reward-line">❌ {tr('Wrong prediction')}: <b>1 {tr('pt')}</b></div>
+                <div class="reward-line">❌ {tr('Wrong prediction')}: <b>1 {tr('point')}</b></div>
             </div>
             """,
             unsafe_allow_html=True

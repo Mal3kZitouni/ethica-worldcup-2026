@@ -6,6 +6,29 @@ from deep_translator import GoogleTranslator
 # ----------------------------------
 _translation_cache = {}
 
+# ----------------------------------
+# Manual translations
+# ----------------------------------
+CUSTOM_TRANSLATIONS = {
+    "Group Stage": "Phase de groupes",
+    "Round of 32": "1/16 de finale",
+    "Round of 16": "1/8 de finale",
+    "Quarter Finals": "Quarts de finale",
+    "Semi Finals": "Demi-finales",
+    "3rd Place Match": "Match pour la 3e place",
+    "Final": "Finale",
+
+    "Home": "Accueil",
+    "Matches": "Matchs",
+    "My Predictions": "Mes pronostics",
+    "Tables": "Tableaux",
+    "Rankings": "Classement",
+    "My Profile": "Mon profil",
+    "Administration": "Administration",
+    "Welcome": "Bienvenue",
+    "point": "point"
+}
+
 
 def tr(text):
     """
@@ -24,9 +47,13 @@ def tr(text):
 
     lang = st.session_state.get("lang", "en")
 
-    # English = original text
+    # English
     if lang == "en":
         return text
+
+    # Manual translations first
+    if text in CUSTOM_TRANSLATIONS:
+        return CUSTOM_TRANSLATIONS[text]
 
     cache_key = f"{lang}:{text}"
 
@@ -34,6 +61,7 @@ def tr(text):
         return _translation_cache[cache_key]
 
     try:
+
         translated = GoogleTranslator(
             source="en",
             target="fr"
@@ -44,4 +72,5 @@ def tr(text):
         return translated
 
     except Exception:
+
         return text
