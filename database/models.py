@@ -152,16 +152,14 @@ class Match(Base):
 
 
 
+
 class Prediction(Base):
     __tablename__ = "predictions"
     __table_args__ = (
-        UniqueConstraint(
-            "user_id",
-            "match_id",
-            name="uq_user_match",
-            **{'extend_existing': True}
-        ),
+        UniqueConstraint("user_id", "match_id", name="uq_user_match"),
+        {"extend_existing": True}  # ✅ correct place
     )
+
 
     id = Column(
         UUID(as_uuid=True),
