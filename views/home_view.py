@@ -123,9 +123,9 @@ def show():
                     ⚽ {tr('Tournament Winner Prediction')}
                 </div>
 
-                <p class="reward-line">
+                <div class="reward-line">
                     💡 {tr('The earlier you choose your champion, the more bonus points you can earn if your prediction is correct.')}
-                </p>
+                </div>
 
                 <div class="reward-line">
                     🏆 {tr('Group Stage')}: <b>15 {tr('points')}</b>
