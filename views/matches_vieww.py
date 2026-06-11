@@ -113,8 +113,7 @@ def show():
     with col2:
 
         selected_date = st.selectbox(
-            tr("Date"),
-            [tr("All")] + dates
+            tr("Date"),dates
         )
 
     with col3:
