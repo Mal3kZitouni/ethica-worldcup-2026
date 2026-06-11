@@ -121,17 +121,17 @@ def show():
 
         search = st.text_input(tr("Search Team"))
         current_filters = (
-    selected_stage,
-    selected_date,
-    search
-)
+            selected_stage,
+            selected_date,
+            search
+        )
 
-if (
-    "last_filters" not in st.session_state
-    or st.session_state.last_filters != current_filters
-):
-    st.session_state.matches_page = 1
-    st.session_state.last_filters = current_filters
+        if (
+            "last_filters" not in st.session_state
+            or st.session_state.last_filters != current_filters
+        ):
+            st.session_state.matches_page = 1
+            st.session_state.last_filters = current_filters
 
     # ==================================================
     # FILTER FUNCTION
