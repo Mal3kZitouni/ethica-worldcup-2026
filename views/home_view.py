@@ -157,40 +157,22 @@ def show():
 
                 with mc1:
 
-                    st.markdown(
-                        f"""
-                        <div style="
-                            display:flex;
-                            justify-content:center;
-                            align-items:center;
-                            gap:40px;
-                            min-height:90px;
-                        ">
-                            <img src="{get_flag_url(match.home_team)}"
-                                style="height:60px;">
+                    col_a, col_b = st.columns([5, 2])
 
-                            <div style="
-                                font-size:40px;
-                                font-weight:bold;
-                                color:#1f3b6d;
-                            ">
-                                VS
-                            </div>
+                    with col_a:
 
-                            <img src="{get_flag_url(match.away_team)}"
-                                style="height:60px;">
-                        </div>
+                        team1, vs_col, team2 = st.columns([2, 1, 2])
 
-                        <div style="
-                            text-align:center;
-                            margin-top:10px;
-                            color:#888;
-                        ">
-                            🏆 {match.stage}
-                        </div>
-                        """,
-                        unsafe_allow_html=True
-                    )
+                        with team1:
+                            st.image(get_flag_url(match.home_team), width=80)
+                            st.write(match.home_team)
+
+                        with vs_col:
+                            st.markdown("## VS")
+
+                        with team2:
+                            st.image(get_flag_url(match.away_team), width=80)
+                            st.write(match.away_team)
 
                     st.caption(f"🏆 {match.stage}")
 
