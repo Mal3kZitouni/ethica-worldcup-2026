@@ -113,14 +113,27 @@ def show():
     with col2:
 
         selected_date = st.selectbox(
-            tr("Date"),dates
+            tr("Date"),
+            [tr("All")] + dates
         )
 
     with col3:
 
         search = st.text_input(tr("Search Team"))
-
+    
     # ==================================================
+    current_filters = (
+    selected_stage,
+    selected_date,
+    search
+)
+
+if (
+    "last_filters" not in st.session_state
+    or st.session_state.last_filters != current_filters
+):
+    st.session_state.matches_page = 1
+    st.session_state.last_filters = current_filters
     # FILTER FUNCTION
     # ==================================================
     def match_filter(match):
@@ -171,17 +184,62 @@ def show():
 
         filtered_matches.append(match)
 
-    if not filtered_matches:
+if not filtered_matches:
 
-        st.success(tr("You have predicted all available matches."))
-        return
+    st.success(tr("You have predicted all available matches."))
+    return
 
-    # ==================================================
-    # DISPLAY MATCHES
-    # ==================================================
-    for match in filtered_matches:
+# ==================================================
+# PAGINATION
+# ==================================================
+if "matches_page" not in st.session_state:
+    st.session_state.matches_page = 1
 
-        render_match(match, user_id)
+matches_per_page = 5
+
+total_pages = (
+    len(filtered_matches) + matches_per_page - 1
+) // matches_per_page
+
+col_prev, col_info, col_next = st.columns([1, 2, 1])
+
+with col_prev:
+    if (
+        st.button("⬅ Previous")
+        and st.session_state.matches_page > 1
+    ):
+        st.session_state.matches_page -= 1
+        st.rerun()
+
+with col_next:
+    if (
+        st.button("Next ➡")
+        and st.session_state.matches_page < total_pages
+    ):
+        st.session_state.matches_page += 1
+        st.rerun()
+
+with col_info:
+    st.markdown(
+        f"<div style='text-align:center;'>Page "
+        f"{st.session_state.matches_page} / {total_pages}</div>",
+        unsafe_allow_html=True
+    )
+
+start = (
+    (st.session_state.matches_page - 1)
+    * matches_per_page
+)
+end = start + matches_per_page
+
+filtered_matches = filtered_matches[start:end]
+
+# ==================================================
+# DISPLAY MATCHES
+# ==================================================
+for match in filtered_matches:
+
+    render_match(match, user_id)
 
 
 # ----------------------
