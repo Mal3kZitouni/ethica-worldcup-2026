@@ -30,8 +30,6 @@ initialize_session()
 if "lang" not in st.session_state:
     st.session_state.lang = "fr"
 
-if "current_page" not in st.session_state:
-    st.session_state.current_page = "Home"
 
 st.markdown("""
 <style>
@@ -290,24 +288,12 @@ else:
 
         pages = list(menu_items.keys())
 
-        current_page = st.session_state.get(
-            "current_page",
-            "Home"
-        )
-
-        if current_page not in pages:
-            current_page = "Home"
-
-        selected_page = st.radio(
-            tr(""),
-            pages,
-            index=pages.index(current_page),
-            format_func=lambda x: menu_items[x]
-        )
-
-        st.session_state.current_page = selected_page
-
-        page = selected_page
+        page = st.radio(
+                    tr(""),
+                    pages,
+                    format_func=lambda x: menu_items[x],
+                    key="current_page"
+)
 
         st.markdown("---")
 
