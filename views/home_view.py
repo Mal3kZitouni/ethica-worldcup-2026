@@ -4,7 +4,7 @@ from services.match_service import load_matches
 from services.ranking_service import get_ranking
 from services.Chat_IA import render_chat_panel
 from services.translations import tr
-from services.CHAT_AI import open_ai_dialog
+from services.Chat_IA import open_ai_dialog
 
 
 # ==================================================
