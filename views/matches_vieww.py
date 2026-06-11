@@ -349,9 +349,62 @@ def render_match(match, user_id):
         # BET WARNING (UNCHANGED)
         # ======================
         if bet_clicked:
-
-            st.markdown("""<div>🛑 Politique de Conformité & Valeurs du Groupe P&A</div>
-                            <div class="ethica-warning-body">
-                    This is a non-betting prediction platform for fun, teamwork and engagement.
-                    Betting or gambling is strictly prohibited.
-                </div>""", unsafe_allow_html=True)
+            # Injection du style CSS de l'effet d'apparition (Warning Premium)
+            st.markdown("""
+                <style>
+                    /* Animation d'impact et d'apparition fluide */
+                    @keyframes warningPulse {
+                        0% { transform: scale(0.92); opacity: 0; }
+                        70% { transform: scale(1.02); }
+                        100% { transform: scale(1); opacity: 1; }
+                    }
+                    
+                    .ethica-warning-box {
+                        animation: warningPulse 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+                        background: linear-gradient(135deg, #FFF5F5 0%, #FFF0F0 100%);
+                        border-left: 6px solid #8D40DA; /* Rappel du violet Ethica */
+                        border-right: 1px solid rgba(229, 62, 62, 0.2);
+                        border-top: 1px solid rgba(229, 62, 62, 0.2);
+                        border-bottom: 1px solid rgba(229, 62, 62, 0.2);
+                        padding: 22px;
+                        border-radius: 12px;
+                        box-shadow: 0 15px 30px rgba(141, 64, 218, 0.1), 0 5px 15px rgba(229, 62, 62, 0.05);
+                        margin-top: 20px;
+                        color: #2D3748;
+                        font-family: inherit;
+                    }
+                    
+                    .ethica-warning-header {
+                        color: #E53E3E;
+                        font-size: 1.2rem;
+                        font-weight: 800;
+                        margin-bottom: 12px;
+                        display: flex;
+                        align-items: center;
+                    }
+                    
+                    .ethica-warning-body {
+                        font-size: 0.95rem;
+                        line-height: 1.6;
+                    }
+                    
+                    .ethica-highlight {
+                        color: #8D40DA;
+                        font-weight: 600;
+                    }
+                </style>
+                
+                <div class="ethica-warning-box">
+                    <div class="ethica-warning-header">
+                        🛑 Politique de Conformité & Valeurs du Groupe Ethica
+                    </div>
+                    <div class="ethica-warning-body">
+                        Cette plateforme est un espace exclusivement conçu pour le <b>divertissement, le team building et la convivialité</b> entre collègues. 
+                        Conformément à la charte de conformité et aux politiques de responsabilité sociétale du <span class="ethica-highlight">Groupe Ethica</span>, 
+                        les paris financiers, les jeux d'argent réel ou l'évaluation de cotes marchandes sont <b>strictement interdits</b> au sein de nos outils d'entreprise.
+                        <br><br>
+                        Ici, notre seule et unique monnaie est la saine compétition, le défi tactique et la fierté de voir son nom briller au sommet du classement corporate ! 
+                        Merci de préserver cet esprit d'équipe et de faire rayonner les valeurs d'éthique et de bienveillance qui font la force de notre groupe. 💜
+                    </div>
+                </div>
+            """, unsafe_allow_html=True)
