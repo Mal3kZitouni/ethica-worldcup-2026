@@ -1,6 +1,5 @@
 import streamlit as st
 from deep_translator import GoogleTranslator
-import html  # ✅ IMPORTANT
 
 # ----------------------------------
 # Translation cache
@@ -48,11 +47,11 @@ def tr(text):
 
     lang = st.session_state.get("lang", "en")
 
-    # ✅ English → return as-is
+    # English
     if lang == "en":
         return text
 
-    # ✅ Manual translations
+    # Manual translations first
     if text in CUSTOM_TRANSLATIONS:
         return CUSTOM_TRANSLATIONS[text]
 
@@ -62,17 +61,16 @@ def tr(text):
         return _translation_cache[cache_key]
 
     try:
+
         translated = GoogleTranslator(
             source="en",
             target="fr"
         ).translate(text)
-
-        # ✅ 🔥 FIX: unescape HTML entities
-        translated = html.unescape(translated)
 
         _translation_cache[cache_key] = translated
 
         return translated
 
     except Exception:
+
         return text
