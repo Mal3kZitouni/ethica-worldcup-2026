@@ -322,7 +322,7 @@ else:
             key="current_page"
         )
 
-        st.session_state.current_page = page
+        
 
         st.markdown("---")
 
