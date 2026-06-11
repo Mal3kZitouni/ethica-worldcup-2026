@@ -29,8 +29,8 @@ initialize_session()
 
 if "lang" not in st.session_state:
     st.session_state.lang = "fr"
-    if "current_page" not in st.session_state:
-    st.session_state.current_page = "Home"
+if "current_page" not in st.session_state:
+st.session_state.current_page = "Home"
 
 
 
