@@ -159,7 +159,7 @@ class Prediction(Base):
             "user_id",
             "match_id",
             name="uq_user_match",
-                'extend_existing': True
+            **{'extend_existing': True}
         ),
     )
 
