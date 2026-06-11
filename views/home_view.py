@@ -210,14 +210,23 @@ def show():
         st.progress(progress)
 
         st.write(f"{completed} / {total_matches} {tr('matches completed')}")
-
     # ==================================================
-    # AI CHAT PANEL
+    # FLOATING AI CHAT (HOME ONLY)
     # ==================================================
-    from services.Chat_IA import render_chat_panel
 
-    with st.expander(
-        "🤖 Prophet AI - Football Analysis & Game Rules",
-        expanded=False
-    ):
+    if "show_ai_chat" not in st.session_state:
+        st.session_state.show_ai_chat = False
+
+    col1, col2, col3 = st.columns([8, 1, 1])
+
+    with col3:
+        if st.button("🤖", key="home_ai_button"):
+            st.session_state.show_ai_chat = (
+                not st.session_state.show_ai_chat
+            )
+
+    if st.session_state.show_ai_chat:
+
+        st.markdown("---")
+
         render_chat_panel()
