@@ -30,8 +30,6 @@ def has_started(match_date):
 # MAIN PAGE
 # ----------------------
 def show():
-    user_id = st.session_state.get("user_id")
-
 
     st.title(f"📝 {tr('My Predictions')}")
 
@@ -219,8 +217,9 @@ def show():
 
     matches = load_matches()
 
-    predictions = get_user_predictions(
-        user_id
+    matches = sorted(
+        matches,
+        key=lambda m: m.match_date
     )
 
     pred_map = {
@@ -317,16 +316,29 @@ def show():
                 f"{actual_home} - {actual_away}"
             )
 
-        if started:
-            row4.error(
+        if actual_home is not None and actual_away is not None:
+
+            row4.success(
+                f"✅ {tr('Finished')}"
+            )
+
+        elif started:
+
+            row4.warning(
                 f"🔒 {tr('Locked')}"
             )
+
         else:
+
             row4.success(
                 f"🟢 {tr('Editable')}"
             )
 
-        if not started:
+        if (
+            not started
+            and actual_home is None
+            and actual_away is None
+        ):
 
             with st.expander(
                 f"{tr('Edit prediction')} - "
