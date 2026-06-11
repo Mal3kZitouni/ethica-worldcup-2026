@@ -26,7 +26,6 @@ def show():
         st.session_state.html_reset_done = True
         st.cache_data.clear()
         st.rerun()
-    ``
 
 
     user_id = st.session_state.get("user_id")
