@@ -20,6 +20,14 @@ POINTS_REWARDS = [
 
 
 def show():
+    
+    # 🔄 Force clean reload if HTML was broken before
+    if "html_reset_done" not in st.session_state:
+        st.session_state.html_reset_done = True
+        st.cache_data.clear()
+        st.rerun()
+    ``
+
 
     user_id = st.session_state.get("user_id")
     user_name = st.session_state.get("user_name")
@@ -88,7 +96,7 @@ def show():
         )
 
         # Match points card
-        st.markdown(
+        #st.markdown(
             f"""
             <div class="reward-card">
                 <div class="reward-title">🥅 {tr('Matches Points')}</div>
@@ -101,7 +109,7 @@ def show():
         )
 
         # Bonus points card
-        st.markdown(
+        #st.markdown(
             f"""
             <div class="reward-card">
                 <div class="reward-title">⚽ {tr('Tournament Winner Prediction')}</div>
