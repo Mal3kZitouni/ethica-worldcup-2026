@@ -45,7 +45,7 @@ def get_group_tables():
     # 3. Apply played matches
     # -----------------------------------
     for m in matches:
-        if not getattr(m, "played", False):
+        if not getattr(m, "finished", False):
             continue
 
         group = m.group_name
