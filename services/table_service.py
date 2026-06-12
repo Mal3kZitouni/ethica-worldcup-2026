@@ -41,12 +41,13 @@ def get_group_tables():
             for team in teams
         }
 
-    # -----------------------------------
-    # 3. Apply played matches
+    # 3. Apply finished matches
     # -----------------------------------
     for m in matches:
-        if getattr(m, "status", "") != "finished":
+        if m.status != "finished":
             continue
+
+ 
 
         group = m.group_name
         home = m.home_team
