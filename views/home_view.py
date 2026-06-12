@@ -4,7 +4,12 @@ from services.match_service import load_matches
 from services.ranking_service import get_ranking
 from services.Chat_IA import render_chat_panel
 from services.translations import tr
+from streamlit_float import *
 
+
+@st.dialog("Performance & Analytics AI", width="large")
+def ai_chat_modal():
+    render_chat_panel()
 
 # ==================================================
 # POINTS REWARDS CONFIG (IMPORTANT FIX)
@@ -101,7 +106,7 @@ def show():
                 <div class="reward-title">🥅 {tr('Matches Points')}</div>
                 <div class="reward-line">⚽ {tr('Exact Score')}: <b>5 {tr('points')}</b></div>
                 <div class="reward-line">🎯 {tr('Correct Result')}: <b>3 {tr('points')}</b></div>
-                <div class="reward-line">❌ {tr('Wrong prediction')}: <b>1 {tr('point')}</b></div>
+                <div class="reward-line">❌ {tr('Make a prediction')}: <b>1 {tr('point')}</b></div>
                 <div class="reward-line">💡 {tr('Predictions can be created or updated until the match kicks off.')}</div>
             """,
             unsafe_allow_html=True
@@ -180,11 +185,11 @@ def show():
         # ==================================================
         # TOP 5 PLAYERS
         # ==================================================
-        st.subheader(f"🥇 {tr('Top 5 Players')}")
+        st.subheader(f"🥇 {tr('Top 3 Players')}")
 
-        top5 = ranking[:5]
+        top3 = ranking[:3]
 
-        for position, player in enumerate(top5, start=1):
+        for position, player in enumerate(top3, start=1):
 
             medal = "🥇" if position == 1 else "🥈" if position == 2 else "🥉" if position == 3 else f"#{position}"
 
@@ -211,22 +216,78 @@ def show():
 
         st.write(f"{completed} / {total_matches} {tr('matches completed')}")
     # ==================================================
-    # FLOATING AI CHAT (HOME ONLY)
+    # FLOATING AI CHAT
+    # ==================================================
+    # ==================================================
+    # FLOATING AI CHAT
     # ==================================================
 
-    if "show_ai_chat" not in st.session_state:
-        st.session_state.show_ai_chat = False
+    st.markdown("""
+    <style>
 
-    col1, col2, col3 = st.columns([8, 1, 1])
+    /* =========================
+    FLOATING BUTTON WRAPPER
+    (ONLY AI BUTTON)
+    ========================= */
 
-    with col3:
-        if st.button("🤖 P&A AI", key="home_ai_button"):
-            st.session_state.show_ai_chat = (
-                not st.session_state.show_ai_chat
-            )
+    div[data-testid="stButton"]:has(button[key="home_ai_button"]) {
+        position: fixed !important;
+        bottom: 25px !important;
+        right: 25px !important;
+        z-index: 999999 !important;
+    }
 
-    if st.session_state.show_ai_chat:
+    /* Hide Streamlit default button style ONLY for AI button */
+    div[data-testid="stButton"]:has(button[key="home_ai_button"]) button {
+        width: 65px !important;
+        height: 65px !important;
+        border-radius: 50% !important;
+        background: transparent !important;
+        font-size: 0 !important;
+        border: none !important;
+    }
 
-        st.markdown("---")
+    /* =========================
+    VISUAL FLOATING ICON
+    ========================= */
 
-        render_chat_panel()
+    .ai-fab {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #8D40DA, #49264F);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        cursor: pointer;
+        z-index: 999998;
+        transition: transform 0.2s ease;
+    }
+
+    .ai-fab:hover {
+        transform: scale(1.08);
+    }
+
+    </style>
+    """, unsafe_allow_html=True)
+
+    # =========================
+    # REAL STREAMLIT BUTTON
+    # =========================
+    if st.button("🤖", key="home_ai_button"):
+        ai_chat_modal()
+
+    # =========================
+    # VISUAL FLOATING ICON
+    # =========================
+    st.markdown("""
+    <div class="ai-fab">
+        🤖
+    </div>
+    """, unsafe_allow_html=True)
