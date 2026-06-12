@@ -41,6 +41,51 @@ st.markdown("""
     --ethica-secondary:#E6BEEA;
 }
 
+/* Fixed sidebar width */
+section[data-testid="stSidebar"] {
+    width: 320px !important;
+    min-width: 320px !important;
+    max-width: 320px !important;
+}
+
+/* Hide resize handle */
+[data-testid="stSidebarResizeHandle"] {
+    display: none !important;
+}
+
+/* Prevent content shift */
+section[data-testid="stSidebar"] > div {
+    width: 320px !important;
+}
+
+/* Fixed sidebar width */
+section[data-testid="stSidebar"] {
+    width: 320px !important;
+    min-width: 320px !important;
+    max-width: 320px !important;
+    overflow: hidden !important;
+}
+
+/* Sidebar content */
+section[data-testid="stSidebar"] > div {
+    width: 320px !important;
+    overflow: hidden !important;
+}
+
+/* Remove scrollbar */
+section[data-testid="stSidebar"] * {
+    scrollbar-width: none !important;   /* Firefox */
+}
+
+section[data-testid="stSidebar"] *::-webkit-scrollbar {
+    display: none !important;           /* Chrome/Edge */
+}
+
+/* Move navigation menu to the right */
+div[role="radiogroup"] {
+    padding-left: 20px !important;
+}
+
 /* Buttons */
 .stButton > button {
     background-color:#8D40DA;
@@ -100,6 +145,7 @@ with st.sidebar:
         key="language_selector"
     )
 
+
     new_lang = (
         "fr"
         if "Français" in selected_lang
@@ -108,14 +154,30 @@ with st.sidebar:
 
     if new_lang != st.session_state.lang:
         st.session_state.lang = new_lang
+
+        # Keep current page selected after language change
+        st.session_state.navigation_radio = (
+            st.session_state.get("current_page", "Home")
+        )
+
         st.rerun()
 
-    st.markdown("---")
+
+
 
 # ==================================================
 # LOGIN / SIGNUP
 # ==================================================
+# ==================================================
+# LOGIN / SIGNUP
+# ==================================================
 if not st.session_state.get("authenticated", False):
+
+    with st.sidebar:
+        st.image(
+            "assets/panda.png",
+            width=270
+        )
 
     login_tab, signup_tab = st.tabs(
         [
@@ -133,24 +195,28 @@ if not st.session_state.get("authenticated", False):
             f"🏆 {tr('P&A World Cup 2026 Predictions')}"
         )
 
-        email = st.text_input(
-            tr("Email Address"),
-            key="login_email"
-        )
+        with st.form("login_form"):
 
-        password = st.text_input(
-            tr("Password"),
-            type="password",
-            key="login_password"
-        )
+            email = st.text_input(
+                tr("Email Address"),
+                key="login_email"
+            )
 
-        if st.button(
-            tr("Login"),
-            key="login_button"
-        ):
+            password = st.text_input(
+                tr("Password"),
+                type="password",
+                key="login_password"
+            )
+
+            login_clicked = st.form_submit_button(
+                tr("Login"),
+                use_container_width=True
+            )
+
+        if login_clicked:
 
             user = authenticate_user(
-                email,
+                email.strip().lower(),
                 password
             )
 
@@ -167,6 +233,7 @@ if not st.session_state.get("authenticated", False):
                 st.rerun()
 
             else:
+
                 st.error(
                     tr("Invalid credentials")
                 )
@@ -180,43 +247,49 @@ if not st.session_state.get("authenticated", False):
             f"📝 {tr('Create Account')}"
         )
 
-        name = st.text_input(
-            tr("Full Name")
-        )
-
         from utils.countries import COUNTRIES
 
-        country = st.selectbox(
-            tr("Country"),
-            COUNTRIES
-        )
+        with st.form("signup_form"):
 
-        team = st.text_input(
-            tr("Team"),
-            value="P&A",
-            disabled=True
-        )
+            name = st.text_input(
+                tr("Full Name")
+            )
 
-        email_signup = st.text_input(
-            tr("Email Address"),
-            key="signup_email"
-        )
+            country = st.selectbox(
+                tr("Country"),
+                COUNTRIES
+            )
 
-        password_signup = st.text_input(
-            tr("Password"),
-            type="password",
-            key="signup_password"
-        )
+            team = st.text_input(
+                tr("Team"),
+                value="P&A",
+                disabled=True
+            )
 
-        confirm_password = st.text_input(
-            tr("Confirm Password"),
-            type="password"
-        )
+            email_signup = st.text_input(
+                tr("Email Address"),
+                key="signup_email"
+            )
 
-        if st.button(
-            tr("Create Account"),
-            key="signup_button"
-        ):
+            password_signup = st.text_input(
+                tr("Password"),
+                type="password",
+                key="signup_password"
+            )
+
+            confirm_password = st.text_input(
+                tr("Confirm Password"),
+                type="password"
+            )
+
+            signup_clicked = st.form_submit_button(
+                tr("Create Account"),
+                use_container_width=True
+            )
+
+        if signup_clicked:
+
+            email_signup = email_signup.strip().lower()
 
             if not name:
 
@@ -230,7 +303,9 @@ if not st.session_state.get("authenticated", False):
                     tr("Email is required")
                 )
 
-            elif not email_signup.lower().endswith("@groupe-ethica.com"):
+            elif not email_signup.endswith(
+                "@groupe-ethica.com"
+            ):
 
                 st.error(
                     "Only @groupe-ethica.com email addresses are allowed."
@@ -245,7 +320,7 @@ if not st.session_state.get("authenticated", False):
             else:
 
                 success, message = register_user(
-                    name=name,
+                    name=name.strip(),
                     email=email_signup,
                     password=password_signup,
                     country=country,
@@ -253,10 +328,17 @@ if not st.session_state.get("authenticated", False):
                 )
 
                 if success:
+
                     st.success(
                         tr("Account created successfully. You can now login.")
                     )
+
+                    st.info(
+                        tr("Please switch to the Login tab and sign in.")
+                    )
+
                 else:
+
                     st.error(message)
 
 # ==================================================
@@ -266,15 +348,24 @@ else:
 
     with st.sidebar:
 
-        left, center, right = st.columns([1, 3, 1])
+        st.markdown(
+            """
+            <div style="text-align:center;">
+            """,
+            unsafe_allow_html=True
+        )
 
-        with center:
-            st.image(
-                "assets/panda.png",
-                width=230
-            )
+        st.image(
+            "assets/panda.png",
+            width=270
+        )
+            # LOGO FOR LOGIN PAGE
 
-        st.markdown("---")
+
+        st.markdown(
+            "</div>",
+            unsafe_allow_html=True
+        )
 
         menu_items = {
             "Home": tr("Home"),
@@ -299,23 +390,29 @@ else:
             current_page = "Home"
 
         selected_page = st.radio(
-            tr(""),
+            "",
             pages,
             index=pages.index(current_page),
-            format_func=lambda x: menu_items[x]
+            format_func=lambda x: menu_items[x],
+            key="navigation_radio"
         )
 
-        st.session_state.current_page = selected_page
-
-        page = selected_page
-
-        st.markdown("---")
-
-        if st.button(
-            tr("Logout")
-        ):
-            st.session_state.clear()
+        if selected_page != st.session_state.current_page:
+            st.session_state.current_page = selected_page
             st.rerun()
+
+        page = st.session_state.current_page
+
+
+        left, center, right = st.columns([1, 3, 2])
+
+        with center:
+            if st.button(
+                tr("Logout"),
+                use_container_width=True
+            ):
+                st.session_state.clear()
+                st.rerun()
 
     # ==================================================
     # ROUTING

@@ -48,7 +48,7 @@ def show():
         st.markdown(
             f"""
             <div style="
-                background: linear-gradient(90deg,#00003d,#49264F);
+                background: linear-gradient(90deg,#361f4d,#6b2ea8);
                 padding:25px;
                 border-radius:20px;
                 margin-bottom:20px;
@@ -104,10 +104,10 @@ def show():
             f"""
             <div class="reward-card">
                 <div class="reward-title">🥅 {tr('Matches Points')}</div>
+                <div class="reward-line">💡 {tr('Predictions can be created or updated until the match kicks off.')}</div>
                 <div class="reward-line">⚽ {tr('Exact Score')}: <b>5 {tr('points')}</b></div>
                 <div class="reward-line">🎯 {tr('Correct Result')}: <b>3 {tr('points')}</b></div>
                 <div class="reward-line">❌ {tr('Make a prediction')}: <b>1 {tr('point')}</b></div>
-                <div class="reward-line">💡 {tr('Predictions can be created or updated until the match kicks off.')}</div>
             """,
             unsafe_allow_html=True
         )
@@ -117,13 +117,13 @@ def show():
             f"""
             <div class="reward-card">
                 <div class="reward-title">⚽ {tr('Tournament Winner Prediction')}</div>
+                <div class="reward-line">💡  {tr('The earlier you choose your champion, the more bonus points you can earn if your prediction is correct.')}</div>
                 <div class="reward-line">🏆 {tr('Group Stage')}: <b>15 {tr('points')}</b></div>
                 <div class="reward-line">🏆 {tr('Round of 32')}: <b>12 {tr('points')}</b></div>
                 <div class="reward-line">🏆 {tr('Round of 16')}: <b>10 {tr('points')}</b></div>
                 <div class="reward-line">🏆 {tr('Quarter Finals')}: <b>7 {tr('points')}</b></div>
                 <div class="reward-line">🏆 {tr('Semi Finals')}: <b>5 {tr('points')}</b></div>
                 <div class="reward-line">🏆 {tr('Final')}: <b>3 {tr('points')}</b></div>
-                <div class="reward-line">💡  {tr('The earlier you choose your champion, the more bonus points you can earn if your prediction is correct.')}</div>
             """,
             unsafe_allow_html=True
         )
@@ -218,76 +218,77 @@ def show():
     # ==================================================
     # FLOATING AI CHAT
     # ==================================================
-    # ==================================================
-    # FLOATING AI CHAT
-    # ==================================================
-
     st.markdown("""
     <style>
 
-    /* =========================
-    FLOATING BUTTON WRAPPER
-    (ONLY AI BUTTON)
-    ========================= */
-
-    div[data-testid="stButton"]:has(button[key="home_ai_button"]) {
+    /* FLOATING POSITION (unchanged) */
+    div[data-testid="stButton"]:has(button[kind="primary"]) {
         position: fixed !important;
-        bottom: 25px !important;
-        right: 25px !important;
+        top: 30% !important;
+        left: 1410px !important;
+        transform: translateY(-50%) !important;
         z-index: 999999 !important;
     }
 
-    /* Hide Streamlit default button style ONLY for AI button */
-    div[data-testid="stButton"]:has(button[key="home_ai_button"]) button {
+    /* CIRCLE BUTTON (unchanged except icon fix) */
+    div[data-testid="stButton"] button[kind="primary"] {
+
         width: 65px !important;
         height: 65px !important;
+        min-width: 65px !important;
+        max-width: 65px !important;
+
         border-radius: 50% !important;
-        background: transparent !important;
-        font-size: 0 !important;
+
+        background: linear-gradient(135deg,#361f4d,#6b2ea8) !important;
+        color: white !important;
+
         border: none !important;
+
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        padding: 0 !important;
+
+        box-shadow: 0 10px 25px rgba(0,0,0,0.25) !important;
+
+        transition: all 0.2s ease-in-out !important;
     }
 
-    /* =========================
-    VISUAL FLOATING ICON
-    ========================= */
+    /* 🔥 ICON FIX ONLY (makes emoji bigger visually) */
+    div[data-testid="stButton"] button[kind="primary"] p {
+        margin: 0 !important;
+        transform: scale(2) !important;
+        line-height: 1 !important;
+    }
 
-    .ai-fab {
-        position: fixed;
-        bottom: 25px;
-        right: 25px;
-        width: 65px;
-        height: 65px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #8D40DA, #49264F);
+    /* HOVER (unchanged) */
+    div[data-testid="stButton"] button[kind="primary"]:hover {
+        transform: scale(1.09) !important;
+    }
+    /* HOVER TEXT   */
+    div[data-testid="stButton"] button[kind="primary"]:hover::after {
+        content: "P&A Assistant";
+        position: absolute;
+        right: 75px;
+        top: 50%;
+        transform: translateY(-50%);
+
+        background: #333;
         color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 28px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-        cursor: pointer;
-        z-index: 999998;
-        transition: transform 0.2s ease;
-    }
 
-    .ai-fab:hover {
-        transform: scale(1.08);
-    }
+        padding: 6px 10px;
+        border-radius: 6px;
+
+        white-space: nowrap;
+        font-size: 12px;
+}
 
     </style>
     """, unsafe_allow_html=True)
 
-    # =========================
-    # REAL STREAMLIT BUTTON
-    # =========================
-    if st.button("🤖", key="home_ai_button"):
-        ai_chat_modal()
 
-    # =========================
-    # VISUAL FLOATING ICON
-    # =========================
-    st.markdown("""
-    <div class="ai-fab">
-        🤖
-    </div>
-    """, unsafe_allow_html=True)
+    # FLOATING BUTTON (UNCHANGED LOGIC)
+    if st.button("🤖", key="home_ai_button", type="primary"):
+        ai_chat_modal()

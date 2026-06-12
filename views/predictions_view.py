@@ -82,7 +82,7 @@ def show():
         st.markdown(
             f"""
             <div style="
-                background:linear-gradient(135deg,#49264F,#00003d);
+                background:linear-gradient(135deg,#361f4d,#6b2ea8);
                 padding:30px;
                 border-radius:20px;
                 color:white;
@@ -247,24 +247,30 @@ def show():
     # TABLE HEADER
     # ----------------------
 
-    header1, header2, header3, header4 = st.columns(
-        [4, 2, 2, 2]
+    header1, header2, header3, header4, header5 = st.columns(
+        [4, 2, 2, 2, 2]
     )
 
-    header1.markdown(
-        f"**{tr('Match')}**"
-    )
+    header1.markdown(f"**{tr('Match')}**")
 
     header2.markdown(
-        f"**{tr('Prediction')}**"
+        f"<div style='text-align:center'><b>{tr('Prediction')}</b></div>",
+        unsafe_allow_html=True
     )
 
     header3.markdown(
-        f"**{tr('Actual Score')}**"
+        f"<div style='text-align:center'><b>{tr('Actual Result')}</b></div>",
+        unsafe_allow_html=True
     )
 
     header4.markdown(
-        f"**{tr('Status')}**"
+        f"<div style='text-align:center'><b>{tr('Points Earned')}</b></div>",
+        unsafe_allow_html=True
+    )
+
+    header5.markdown(
+        f"<div style='text-align:center'><b>{tr('Status')}</b></div>",
+        unsafe_allow_html=True
     )
 
     st.markdown("---")
@@ -280,21 +286,21 @@ def show():
         if not pred:
             continue
 
-        started = has_started(
-            match.match_date
+        started = has_started(match.match_date)
+
+        row1, row2, row3, row4, row5 = st.columns(
+            [4, 2, 2, 2, 2]
         )
 
-        row1, row2, row3, row4 = st.columns(
-            [4, 2, 2, 2]
-        )
-
+        # Match
         row1.write(
             f"{match.home_team} vs {match.away_team}"
         )
 
-        row2.write(
-            f"{pred.predicted_home_score} - "
-            f"{pred.predicted_away_score}"
+        # Prediction (centered)
+        row2.markdown(
+            f"<div style='text-align:center'>{pred.predicted_home_score} - {pred.predicted_away_score}</div>",
+            unsafe_allow_html=True
         )
 
         actual_home = getattr(
@@ -309,29 +315,74 @@ def show():
             None
         )
 
+        # Actual Result (centered)
         if actual_home is None or actual_away is None:
-            row3.write("—")
-        else:
-            row3.write(
-                f"{actual_home} - {actual_away}"
+
+            row3.markdown(
+                "<div style='text-align:center'>—</div>",
+                unsafe_allow_html=True
             )
+
+        else:
+
+            row3.markdown(
+                f"<div style='text-align:center'>{actual_home} - {actual_away}</div>",
+                unsafe_allow_html=True
+            )
+
+        # Points Earned (centered)
+        points = pred.points_earned or 0
 
         if actual_home is not None and actual_away is not None:
 
-            row4.success(
-                f"✅ {tr('Finished')}"
+            if points == 5:
+
+                row4.markdown(
+                    "<div style='text-align:center'>⭐ 5</div>",
+                    unsafe_allow_html=True
+                )
+
+            elif points == 3:
+
+                row4.markdown(
+                    "<div style='text-align:center'>🎯 3</div>",
+                    unsafe_allow_html=True
+                )
+
+            else:
+
+                row4.markdown(
+                    f"<div style='text-align:center'>{points}</div>",
+                    unsafe_allow_html=True
+                )
+
+        else:
+
+            row4.markdown(
+                "<div style='text-align:center'>—</div>",
+                unsafe_allow_html=True
+            )
+
+        # Status (centered)
+        if actual_home is not None and actual_away is not None:
+
+            row5.markdown(
+                f"<div style='text-align:center'>🏁 {tr('Finished')}</div>",
+                unsafe_allow_html=True
             )
 
         elif started:
 
-            row4.warning(
-                f"🔒 {tr('Locked')}"
+            row5.markdown(
+                f"<div style='text-align:center'>🔒 {tr('Locked')}</div>",
+                unsafe_allow_html=True
             )
 
         else:
 
-            row4.success(
-                f"🟢 {tr('Editable')}"
+            row5.markdown(
+                f"<div style='text-align:center'>🟢 {tr('Editable')}</div>",
+                unsafe_allow_html=True
             )
 
         if (

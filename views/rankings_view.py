@@ -29,40 +29,81 @@ def show():
 
         return
 
-    col1, col2, col3, col4, col5 = st.columns(
-        [1, 4, 3, 2, 2]
+    # ==========================================
+    # HEADER
+    # ==========================================
+    st.markdown(
+        f"""
+        <div style="
+            display:grid;
+            grid-template-columns:1fr 4fr 3fr 2fr 2fr;
+            background:#F8F9FC;
+            padding:12px;
+            border-radius:10px;
+            font-weight:700;
+            margin-bottom:10px;
+            border:1px solid #EAEAEA;
+            text-align:center;
+            align-items:center;
+        ">
+            <div>{tr('Rank')}</div>
+            <div>{tr('User')}</div>
+            <div>{tr('Country')}</div>
+            <div>{tr('Points')}</div>
+            <div>{tr('Predictions')}</div>
+        </div>
+        """,
+        unsafe_allow_html=True
     )
 
-    col1.markdown(f"**{tr('Rank')}**")
-    col2.markdown(f"**{tr('User')}**")
-    col3.markdown(f"**{tr('Country')}**")
-    col4.markdown(f"**{tr('Points')}**")
-    col5.markdown(f"**{tr('Predictions')}**")
-
-    st.markdown("---")
-
-    for idx, row in enumerate(
-        ranking,
-        start=1
-    ):
-
-        c1, c2, c3, c4, c5 = st.columns(
-            [1, 4, 3, 2, 2]
-        )
+    # ==========================================
+    # ROWS
+    # ==========================================
+    for idx, row in enumerate(ranking, start=1):
 
         if idx == 1:
+            bg = "rgba(255, 215, 0, 0.30)"
+            border = "#f6d109"
             rank = "🥇"
+
         elif idx == 2:
+            bg = "rgba(160, 160, 160, 0.30)"
+            border = "#A0A0A0"
             rank = "🥈"
+
         elif idx == 3:
+            bg = "rgba(205, 127, 50, 0.30)"
+            border = "#d9893a"
             rank = "🥉"
+
         else:
+            bg = "#FFFFFF"
+            border = "#EFEFEF"
             rank = str(idx)
 
-        c1.write(rank)
-        c2.write(row.name)
-        c3.write(row.country or "-")
-        c4.write(row.points)
-        c5.write(row.predictions)
-
-        st.markdown("---")
+        st.markdown(
+            f"""
+            <div style="
+                background:{bg};
+                border-left:5px solid {border};
+                border-radius:10px;
+                padding:12px;
+                margin-bottom:8px;
+                border:1px solid #F1F1F1;
+            ">
+                <div style="
+                    display:grid;
+                    grid-template-columns:1fr 4fr 3fr 2fr 2fr;
+                    align-items:center;
+                    text-align:center;
+                ">
+                    <div><b>{rank}</b></div>
+                    <div>{row.name}</div>
+                    <div>{row.country or '-'}</div>
+                    <div><b>{row.points}</b></div>
+                    <div>{row.predictions}</div>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )

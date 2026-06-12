@@ -27,7 +27,18 @@ CUSTOM_TRANSLATIONS = {
     "Administration": "Administration",
     "Welcome": "Bienvenue",
     "point": "point",
-    "Matches Points": "Points des matchs"
+    "Matches Points": "Points des matchs",
+    "Match": "Match",
+    'Actual Result': 'Résultat actuel',
+    'Locked': 'Verrouillé',
+    'Editable': 'Modifiable',
+    "Tournament Winner Prediction": "Prédiction du vainqueur du tournoi",
+    "The earlier you choose your champion, the more bonus points you can earn if your prediction is correct.": "Plus vous choisissez votre champion tôt, plus vous pouvez gagner de points bonus si votre prédiction est correcte.",
+    "Your Current Ranking": "Votre classement actuel",
+    "Please login to view your predictions": "Veuillez vous connecter pour voir vos pronostics",
+    "Access denied": "Accès refusé",
+    "Prediction": "Prédiction",
+    "Add Match": "Ajouter un match",
 }
 
 

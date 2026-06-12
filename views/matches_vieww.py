@@ -396,11 +396,11 @@ def render_match(match, user_id):
                 
                 <div class="ethica-warning-box">
                     <div class="ethica-warning-header">
-                        🛑 Politique de Conformité & Valeurs du Groupe Ethica
+                        🛑 Politique de Conformité & Valeurs du Performance & Analytics Team
                     </div>
                     <div class="ethica-warning-body">
-                        Cette plateforme est un espace exclusivement conçu pour le <b>divertissement, le team building et la convivialité</b> entre collègues. 
-                        Conformément à la charte de conformité et aux politiques de responsabilité sociétale du <span class="ethica-highlight">Groupe Ethica</span>, 
+                        ette plateforme est un espace exclusivement conçu pour le <b>divertissement, le team building et la convivialité</b> entre collègues. 
+                        Conformément à la charte de conformité et aux politiques de responsabilité sociétale du <span class="ethica-highlight">Performance & Analytics Team</span>, 
                         les paris financiers, les jeux d'argent réel ou l'évaluation de cotes marchandes sont <b>strictement interdits</b> au sein de nos outils d'entreprise.
                         <br><br>
                         Ici, notre seule et unique monnaie est la saine compétition, le défi tactique et la fierté de voir son nom briller au sommet du classement corporate ! 
